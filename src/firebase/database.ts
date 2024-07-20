@@ -1,6 +1,6 @@
 import util from '@/util/util';
 import { db } from './firebase'
-import { ref, set, get, child } from "firebase/database";
+import { ref, set, get, child, update, remove } from "firebase/database";
 import { v4 as uuidv4 } from 'uuid';
 
 const getUuid = () => {
@@ -56,5 +56,20 @@ export const postModel = {
           } catch (error) {
               console.log(error)
           }
-        }
+        },
+
+        async updatePost(post: Post) {
+            try {
+                return await update(ref(db, `/posts/${post.id}`), post)
+            } catch (error) {
+                console.log(error)
+            }
+          },
+          async deletePostById(postId: string) {
+            try {
+                return await remove(ref(db, `/posts/${postId}`));
+            } catch (error) {
+                console.log(error)
+            }
+          }
 }

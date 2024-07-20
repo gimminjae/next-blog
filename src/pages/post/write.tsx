@@ -1,9 +1,11 @@
 import { useAuth } from "@/firebase/auth";
 import { postModel } from "@/firebase/database";
+import { useRouter } from "next/router";
 import React, { useCallback, useState } from "react";
 
 const WritePostPage = () => {
   const { user } = useAuth();
+  const router = useRouter();
 
   const [post, setPost] = useState<Post>({
     userId: "",
@@ -23,6 +25,7 @@ const WritePostPage = () => {
       alert("title, content is empty");
     }
     postModel.writePost({ ...post, userId: user?.uid as string });
+    router.push("/post");
   }, [post]);
   return (
     <>
