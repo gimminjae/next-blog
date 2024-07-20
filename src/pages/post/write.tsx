@@ -1,5 +1,5 @@
 import { useAuth } from "@/firebase/auth";
-import { writePost } from "@/firebase/database";
+import { postModel } from "@/firebase/database";
 import React, { useCallback, useState } from "react";
 
 const WritePostPage = () => {
@@ -22,7 +22,7 @@ const WritePostPage = () => {
     if (!post.title.trim() || !post.content.trim()) {
       alert("title, content is empty");
     }
-    writePost({ ...post, userId: user?.uid as string });
+    postModel.writePost({ ...post, userId: user?.uid as string });
   }, [post]);
   return (
     <>

@@ -1,36 +1,26 @@
 import { useAuth } from "@/firebase/auth";
-import { getPostListByUserId, getPostById } from "@/firebase/database";
+import { postModel } from "@/firebase/database";
 import React, { useCallback, useEffect, useState } from "react";
+import { Post } from "./post/Post";
+import { useQuery } from "react-query";
 
 const PostList = () => {
   const { user } = useAuth();
-  const [postList, setPostList] = useState<any[]>([]);
-  const getMyPosts = useCallback(async () => {
-    const result = await getPostListByUserId(user ? user.uid : "");
-    console.log("result: ", result);
-    setPostList(result);
-  }, [user]);
-  useEffect(() => {
-    getMyPosts();
-  }, []);
-  useEffect(() => {
-    console.log(postList.entries);
-  }, [postList]);
+  const {
+    isLoading,
+    error,
+    data: postList,
+  } = useQuery<Post[], Error>(["posts"], postModel.getPostList);
   return (
     <>
       <div>PostList</div>
+      {isLoading && <p>is loading...</p>}
+      {error && <p>{error.message}</p>}
       {postList &&
+        Array.isArray(postList) &&
         postList.length &&
-        postList.map((post: any) => {
-          console.log(post);
-          return (
-            // eslint-disable-next-line react/jsx-key
-            <div>
-              <p>{post[0].title}</p>
-              <p>{post[0].content}</p>
-            </div>
-          );
-        })}
+        // eslint-disable-next-line react/jsx-key
+        postList.map((post: Post) => <Post post={post} />)}
     </>
   );
 };

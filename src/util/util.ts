@@ -21,7 +21,14 @@ const util = {
     const seconds = String(now.getSeconds()).padStart(2, '0');
 
     return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-}
+  },
+  tryCatchFunction(f: any, catchF :any) {
+      try {
+          return f()
+      } catch(error) {
+          catchF(error)
+      }
+  }
 }
 
 export default util
