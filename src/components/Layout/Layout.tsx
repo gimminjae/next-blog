@@ -6,7 +6,7 @@ function Layout({ children }: React.PropsWithChildren<{}>) {
   return (
     <>
       <Header />
-      {children}
+      <div className="sm:container sm:mx-auto">{children}</div>
     </>
   );
 }
