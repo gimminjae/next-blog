@@ -1,34 +1,34 @@
-import { useAuth } from "@/firebase/auth";
-import { postModel } from "@/firebase/database";
-import dynamic from "next/dynamic";
-import { useRouter } from "next/router";
-import { useCallback, useEffect, useMemo } from "react";
-import { useQuery } from "react-query";
+import { useAuth } from "@/firebase/auth"
+import { postModel } from "@/firebase/database"
+import dynamic from "next/dynamic"
+import { useRouter } from "next/router"
+import { useCallback, useEffect, useMemo } from "react"
+import { useQuery } from "react-query"
 
 const MdViewer = dynamic(() => import("@/components/post/MdViewer"), {
   ssr: false,
-});
+})
 
 const PostDetail = () => {
-  const router = useRouter();
-  const { user } = useAuth();
-  const postId = useMemo(() => router.query.id as string, [router]);
+  const router = useRouter()
+  const { user } = useAuth()
+  const postId = useMemo(() => router.query.id as string, [router])
   const {
     isLoading,
     error,
     data: post,
-  } = useQuery<Post, Error>(["post"], () => postModel.getPostById(postId));
+  } = useQuery<Post, Error>(["post"], () => postModel.getPostById(postId))
   useEffect(() => {
-    if (!postId) router.push("/post");
-  }, [postId]);
+    if (!postId) router.push("/post")
+  }, [postId])
   const handleDelete = useCallback(() => {
-    const result = postModel.deletePostById(postId);
-    router.push("/post");
-  }, [user, postId, post]);
+    const result = postModel.deletePostById(postId)
+    router.push("/post")
+  }, [user, postId, post])
 
   const pushEditPost = useCallback(() => {
-    router.push(`/post/edit/${postId}`);
-  }, [router, postId]);
+    router.push(`/post/edit/${postId}`)
+  }, [router, postId])
   return (
     <>
       {isLoading && <p>is loading</p>}
@@ -68,6 +68,6 @@ const PostDetail = () => {
         </div>
       )}
     </>
-  );
-};
-export default PostDetail;
+  )
+}
+export default PostDetail

@@ -1,5 +1,5 @@
-import util from "@/util/util";
-import { db } from "./firebase";
+import util from "@/util/util"
+import { db } from "./firebase"
 import {
   ref,
   set,
@@ -11,21 +11,21 @@ import {
   query,
   equalTo,
   orderByValue,
-} from "firebase/database";
-import { v4 as uuidv4 } from "uuid";
+} from "firebase/database"
+import { v4 as uuidv4 } from "uuid"
 
 const getUuid = () => {
-  const uuid = uuidv4();
-  const tokens = uuid.split("-");
-  return tokens[2] + tokens[1] + tokens[0] + tokens[3] + tokens[4];
-};
+  const uuid = uuidv4()
+  const tokens = uuid.split("-")
+  return tokens[2] + tokens[1] + tokens[0] + tokens[3] + tokens[4]
+}
 
 export const postModel = {
   async writePost({ userId, title, content }: Post) {
-    const id = getUuid();
-    const now = new Date();
-    const nowStr = util.getFormattedDateTime(now);
-    const nowStamp = util.getDateTimeStamp(now);
+    const id = getUuid()
+    const now = new Date()
+    const nowStr = util.getFormattedDateTime(now)
+    const nowStamp = util.getDateTimeStamp(now)
     set(ref(db, `posts/${id}`), {
       id: id,
       userId: userId,
@@ -34,32 +34,32 @@ export const postModel = {
       createdAt: nowStr,
       updatedAt: nowStr,
       createdAtTimeStamp: nowStamp,
-    });
+    })
   },
 
   async getPostById(id: string) {
     const result = await get(child(ref(db), `posts/${id}`))
       .then((snapshot) => {
         if (snapshot.exists()) {
-          return snapshot.val();
+          return snapshot.val()
         } else {
-          console.log("No data available");
+          console.log("No data available")
         }
       })
       .catch((error) => {
-        console.error(error);
-      });
-    return result;
+        console.error(error)
+      })
+    return result
   },
 
   async getPostListByUserId(userId: string) {
     try {
       const snapshot = await get(
         query(ref(db, "posts"), orderByChild("userId"), equalTo(userId))
-      );
-      return Object.values(snapshot.val());
+      )
+      return Object.values(snapshot.val())
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
   },
 
@@ -67,10 +67,10 @@ export const postModel = {
     try {
       const snapshot = await get(
         query(ref(db, "posts"), orderByChild("createdAtTimeStamp"))
-      );
-      return snapshot.exists() ? Object.values(snapshot.val()) : [];
+      )
+      return snapshot.exists() ? Object.values(snapshot.val()) : []
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
   },
 
@@ -79,16 +79,16 @@ export const postModel = {
       return await update(ref(db, `/posts/${post.id}`), {
         ...post,
         updatedAt: util.getFormattedCurrentDateTime(),
-      });
+      })
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
   },
   async deletePostById(postId: string) {
     try {
-      return await remove(ref(db, `/posts/${postId}`));
+      return await remove(ref(db, `/posts/${postId}`))
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
   },
-};
+}

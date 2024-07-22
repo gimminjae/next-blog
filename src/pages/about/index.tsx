@@ -1,5 +1,5 @@
-import Link from "next/link";
-import React from "react";
+import Link from "next/link"
+import React from "react"
 
 const Home = () => {
   return (
@@ -7,6 +7,6 @@ const Home = () => {
       <h1>About</h1>
       <Link href="/post">Go to Post</Link>
     </div>
-  );
-};
-export default Home;
+  )
+}
+export default Home

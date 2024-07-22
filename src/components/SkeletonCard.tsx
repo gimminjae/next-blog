@@ -10,7 +10,7 @@ const SkeletonCard = () => {
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default SkeletonCard;
+export default SkeletonCard

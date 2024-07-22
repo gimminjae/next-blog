@@ -1,8 +1,8 @@
-import SkeletonCard from "./SkeletonCard";
+import SkeletonCard from "./SkeletonCard"
 
 interface Props {
-  columnNumber: number;
-  length: number;
+  columnNumber: number
+  length: number
 }
 const SkeletonCardList = ({ columnNumber, length }: Props) => {
   return (
@@ -13,7 +13,7 @@ const SkeletonCardList = ({ columnNumber, length }: Props) => {
         <SkeletonCard key={index} />
       ))}
     </div>
-  );
-};
+  )
+}
 
-export default SkeletonCardList;
+export default SkeletonCardList

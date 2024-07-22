@@ -1,11 +1,11 @@
-import React, { useCallback, useEffect, useState } from "react";
-import Post from "./post/Post";
-import SkeletonCardList from "./SkeletonCardList";
+import React, { useCallback, useEffect, useState } from "react"
+import Post from "./post/Post"
+import SkeletonCardList from "./SkeletonCardList"
 
 interface DataSet {
-  isLoading: Boolean;
-  error: any;
-  postList: Post[] | any;
+  isLoading: Boolean
+  error: any
+  postList: Post[] | any
 }
 const PostList = ({ isLoading, error, postList }: DataSet) => {
   return (
@@ -20,6 +20,6 @@ const PostList = ({ isLoading, error, postList }: DataSet) => {
           postList.map((post: Post) => <Post post={post} />)}
       </div>
     </>
-  );
-};
-export default PostList;
+  )
+}
+export default PostList

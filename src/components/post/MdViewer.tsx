@@ -1,4 +1,4 @@
-import MDEditor from "@uiw/react-md-editor";
+import MDEditor from "@uiw/react-md-editor"
 
 const MdViewer = ({ content }: any) => {
   return (
@@ -11,6 +11,6 @@ const MdViewer = ({ content }: any) => {
         <MDEditor.Markdown style={{ padding: 10 }} source={content} />
       </div>
     </>
-  );
-};
-export default MdViewer;
+  )
+}
+export default MdViewer

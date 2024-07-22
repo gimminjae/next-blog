@@ -1,10 +1,10 @@
-import Link from "next/link";
-import { useAuth } from "@/firebase/auth";
-import React from "react";
-import Image from "next/image";
+import Link from "next/link"
+import { useAuth } from "@/firebase/auth"
+import React from "react"
+import Image from "next/image"
 
 const Header = () => {
-  const { user, loginWithGoogle, logout } = useAuth();
+  const { user, loginWithGoogle, logout } = useAuth()
 
   return (
     <header>
@@ -112,7 +112,7 @@ const Header = () => {
         )}
       </div> */}
     </header>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header
