@@ -14,13 +14,8 @@ const UsersPostList = () => {
   );
   return (
     <>
-      <div>My Post</div>
-      {isLoading && <p>is loading...</p>}
-      {error && <p>{error.message}</p>}
-      {postList && Array.isArray(postList) && postList.length && (
-        // eslint-disable-next-line react/jsx-key
-        <PostList isLoading={isLoading} error={error} postList={postList} />
-      )}
+      <h1 className="text-5xl mx-3 my-3">My Post</h1>
+      <PostList isLoading={isLoading} error={error} postList={postList} />
     </>
   );
 };

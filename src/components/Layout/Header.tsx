@@ -8,7 +8,7 @@ const Header = () => {
 
   return (
     <header>
-      <div className="navbar bg-base-100">
+      <div className="navbar bg-base-100 sticky top-0 z-30">
         <div className="navbar-start">
           <Link href="/" className="btn btn-ghost text-xl">
             daisyUI

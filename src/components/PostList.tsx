@@ -5,7 +5,7 @@ import SkeletonCardList from "./SkeletonCardList";
 interface DataSet {
   isLoading: Boolean;
   error: any;
-  postList: Post[];
+  postList: Post[] | any;
 }
 const PostList = ({ isLoading, error, postList }: DataSet) => {
   return (
