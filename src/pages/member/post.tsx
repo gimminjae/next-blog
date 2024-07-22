@@ -1,7 +1,7 @@
 import { useAuth } from "@/firebase/auth";
 import { postModel } from "@/firebase/database";
 import { useQuery } from "react-query";
-import { Post } from "../../components/post/Post";
+import PostList from "@/components/PostList";
 
 const UsersPostList = () => {
   const { user } = useAuth();
@@ -14,14 +14,13 @@ const UsersPostList = () => {
   );
   return (
     <>
-      <div>PostList</div>
+      <div>My Post</div>
       {isLoading && <p>is loading...</p>}
       {error && <p>{error.message}</p>}
-      {postList &&
-        Array.isArray(postList) &&
-        postList.length &&
+      {postList && Array.isArray(postList) && postList.length && (
         // eslint-disable-next-line react/jsx-key
-        postList.map((post: Post) => <Post post={post} />)}
+        <PostList isLoading={isLoading} error={error} postList={postList} />
+      )}
     </>
   );
 };

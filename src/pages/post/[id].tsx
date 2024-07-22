@@ -1,14 +1,18 @@
 import { useAuth } from "@/firebase/auth";
 import { postModel } from "@/firebase/database";
-import Link from "next/link";
+import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 import { useQuery } from "react-query";
+
+const MdViewer = dynamic(() => import("@/components/post/MdViewer"), {
+  ssr: false,
+});
 
 const PostDetail = () => {
   const router = useRouter();
   const { user } = useAuth();
-  const postId = router.query.id as string;
+  const postId = useMemo(() => router.query.id as string, [router]);
   const {
     isLoading,
     error,
@@ -16,31 +20,51 @@ const PostDetail = () => {
   } = useQuery<Post, Error>(["post"], () => postModel.getPostById(postId));
   useEffect(() => {
     if (!postId) router.push("/post");
-  }, []);
+  }, [postId]);
   const handleDelete = useCallback(() => {
     const result = postModel.deletePostById(postId);
     router.push("/post");
   }, [user, postId, post]);
+
+  const pushEditPost = useCallback(() => {
+    router.push(`/post/edit/${postId}`);
+  }, [router, postId]);
   return (
     <>
       {isLoading && <p>is loading</p>}
       {error && <p>{error.message}</p>}
       {post && (
         <div>
-          <h1>{post.title}</h1>
-          <div>
-            <p>{post.createdAt}</p>
-            <p>{post.updatedAt}</p>
-            {user?.uid === post.userId && (
-              <div>
-                <button onClick={() => console.log("post update")}>
-                  update
-                </button>
-                <button onClick={handleDelete}>delete</button>
+          <div className="flex justify-between">
+            <div className="flex flex-col gap-3">
+              <h1 className="text-6xl">{post.title}</h1>
+              <div className="flex gap-5">
+                <div className="badge badge-outline">{post.createdAt}</div>
+                <div className="badge badge-outline">{post.updatedAt}</div>
               </div>
-            )}
+            </div>
+            <div className="flex items-center">
+              {user?.uid === post.userId && (
+                <>
+                  <button
+                    className="btn btn-active btn-sm btn-link"
+                    onClick={pushEditPost}
+                  >
+                    update
+                  </button>
+                  <button
+                    className="btn btn-active btn-sm btn-link"
+                    onClick={handleDelete}
+                  >
+                    delete
+                  </button>
+                </>
+              )}
+            </div>
           </div>
-          <p>{post.content}</p>
+          <div className="sm:container sm:mx-auto">
+            <MdViewer content={post.content} />
+          </div>
         </div>
       )}
     </>

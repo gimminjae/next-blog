@@ -2,22 +2,15 @@ import { useAuth } from "@/firebase/auth";
 import { postModel } from "@/firebase/database";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
-import React, {
-  ChangeEvent,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { ChangeEvent, useCallback, useEffect, useState } from "react";
 
 const MdEditor = dynamic(() => import("@/components/post/MdEditor"), {
   ssr: false,
 });
 
-const WritePostPage = () => {
+const EditPostPage = () => {
   const { user } = useAuth();
   const router = useRouter();
-
   const [post, setPost] = useState<Post>({
     userId: "",
     title: "",
@@ -40,9 +33,19 @@ const WritePostPage = () => {
     if (!post.title.trim() || !post.content.trim()) {
       alert("title, content is empty");
     }
-    postModel.writePost({ ...post, userId: user?.uid as string });
-    router.push("/post");
+    postModel.updatePost({ ...post, userId: user?.uid as string });
+    router.push(`/post/${post.id}`);
   }, [post]);
+
+  const getPost = useCallback(async () => {
+    const postId = router.query.id;
+    const apiPost = await postModel.getPostById(postId as string);
+    setPost(apiPost);
+  }, [router]);
+
+  useEffect(() => {
+    getPost();
+  }, []);
   return (
     <>
       <div className="flex justify-between">
@@ -66,4 +69,4 @@ const WritePostPage = () => {
   );
 };
 
-export default WritePostPage;
+export default EditPostPage;

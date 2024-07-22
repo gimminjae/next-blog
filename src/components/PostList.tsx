@@ -1,26 +1,24 @@
-import { useAuth } from "@/firebase/auth";
-import { postModel } from "@/firebase/database";
 import React, { useCallback, useEffect, useState } from "react";
-import { Post } from "./post/Post";
-import { useQuery } from "react-query";
+import Post from "./post/Post";
+import SkeletonCardList from "./SkeletonCardList";
 
-const PostList = () => {
-  const { user } = useAuth();
-  const {
-    isLoading,
-    error,
-    data: postList,
-  } = useQuery<Post[], Error>(["posts"], postModel.getPostList);
+interface DataSet {
+  isLoading: Boolean;
+  error: any;
+  postList: Post[];
+}
+const PostList = ({ isLoading, error, postList }: DataSet) => {
   return (
     <>
-      <div>PostList</div>
-      {isLoading && <p>is loading...</p>}
+      {isLoading && <SkeletonCardList length={20} columnNumber={5} />}
       {error && <p>{error.message}</p>}
-      {postList &&
-        Array.isArray(postList) &&
-        postList.length &&
-        // eslint-disable-next-line react/jsx-key
-        postList.map((post: Post) => <Post post={post} />)}
+      <div className="grid grid-cols-5 gap-4 place-content-center">
+        {postList &&
+          Array.isArray(postList) &&
+          postList.length &&
+          // eslint-disable-next-line react/jsx-key
+          postList.map((post: Post) => <Post post={post} />)}
+      </div>
     </>
   );
 };
