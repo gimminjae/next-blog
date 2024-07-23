@@ -41,7 +41,9 @@ const MdEditor = ({ value, onChange }: any) => {
     await Promise.all(
       files.map(async (file) => {
         const url = await store.uploadImage(file)
-        const insertedMarkdown = insertToTextArea(`![](${url})`)
+        const insertedMarkdown = insertToTextArea(
+          `<img src="${url}" alt="image" width=600 />`
+        )
         if (!insertedMarkdown) {
           return
         }
@@ -60,7 +62,6 @@ const MdEditor = ({ value, onChange }: any) => {
             onChange(value)
           }}
           onPaste={async (event) => {
-            event.preventDefault()
             await onImagePasted(event.clipboardData, onChange)
           }}
           onDrop={async (event) => {

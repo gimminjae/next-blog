@@ -48,22 +48,34 @@ const EditPostPage = () => {
   }, [])
   return (
     <>
-      <div className="flex justify-between">
-        <input
-          className="input input-primary"
-          type="text"
-          id="title"
-          value={post.title}
-          onChange={handleChange}
-        />
-        <button className="btn btn-primary" onClick={submitPost}>
-          submit
-        </button>
-      </div>
-      <div>
-        {typeof window !== "undefined" && MdEditor && (
-          <MdEditor value={post.content} onChange={setContent} />
-        )}
+      <div className="flex flex-col gap-5 my-5">
+        <div className="flex justify-between">
+          <label className="input input-bordered flex items-center gap-2  w-1/2">
+            Title
+            <input
+              className="grow"
+              type="text"
+              id="title"
+              value={post.title}
+              onChange={handleChange}
+            />
+          </label>
+          <div className="flex gap-3">
+            <div className="whitespace-nowrap">Banner Image</div>
+            <input
+              type="file"
+              className="file-input file-input-bordered file-input-md w-full max-w-xs"
+            />
+            <button className="btn btn-primary" onClick={submitPost}>
+              submit
+            </button>
+          </div>
+        </div>
+        <div>
+          {typeof window !== "undefined" && MdEditor && (
+            <MdEditor value={post.content} onChange={setContent} />
+          )}
+        </div>
       </div>
     </>
   )
