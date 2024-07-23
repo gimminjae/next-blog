@@ -11,7 +11,7 @@ const Header = () => {
       <div className="navbar bg-base-100 sticky top-0 z-30">
         <div className="navbar-start">
           <Link href="/" className="btn btn-ghost text-xl">
-            daisyUI
+            Dev Diary
           </Link>
         </div>
         <div className="navbar-center lg:flex">
