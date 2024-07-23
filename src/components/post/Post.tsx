@@ -10,7 +10,8 @@ const Post = (props: { post: Post }) => {
         imageSrc=""
         alt=""
         title={post.title}
-        content={`${post.content.substring(0, 50)}${"..."}`}
+        content={""}
+        //`${post.content.substring(0, 50)}${"..."}`
         createdAt={post.createdAt as string}
         btnStr="Detail"
         onClick={() => router.push(`/post/${post.id}`)}

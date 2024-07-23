@@ -21,7 +21,7 @@ const Loading = ({
 }: Props) => {
   return (
     <>
-      <div className="fixed inset-0 flex items-center justify-center bg-gray-100">
+      <div className="fixed inset-0 flex items-center justify-center bg-gray-100 z-100">
         <span
           className={`loading loading-${type} loading-${size} ${
             color ? `text-${color}` : ""
