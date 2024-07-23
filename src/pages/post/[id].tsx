@@ -34,7 +34,7 @@ const PostDetail = () => {
       {isLoading && <p>is loading</p>}
       {error && <p>{error.message}</p>}
       {post && (
-        <div className="mx-auto w-1/2">
+        <div className="mx-auto xl:w-1/2 lg:w-3/5">
           <div className="flex justify-between">
             <div className="flex flex-col gap-3">
               <h1 className="text-6xl">{post.title}</h1>

@@ -12,7 +12,7 @@ const PostList = ({ isLoading, error, postList }: DataSet) => {
     <>
       {isLoading && <SkeletonCardList length={20} columnNumber={5} />}
       {error && <p>{error.message}</p>}
-      <div className="grid grid-cols-5 gap-4 place-content-center">
+      <div className="flex flex-wrap gap-3 place-content-center">
         {postList &&
           Array.isArray(postList) &&
           postList.length &&
