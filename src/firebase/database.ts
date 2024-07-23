@@ -10,7 +10,6 @@ import {
   orderByChild,
   query,
   equalTo,
-  orderByValue,
 } from "firebase/database"
 import { v4 as uuidv4 } from "uuid"
 

@@ -9,7 +9,7 @@ const UsersPostList = () => {
     isLoading,
     error,
     data: postList,
-  } = useQuery<Post[], Error>(["posts"], () =>
+  } = useQuery(["posts"], () =>
     postModel.getPostListByUserId(user?.uid as string)
   )
   return (

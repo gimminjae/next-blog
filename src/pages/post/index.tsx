@@ -8,7 +8,7 @@ const PostPage = () => {
     isLoading,
     error,
     data: postList,
-  } = useQuery<Post[], Error>(["posts"], postModel.getPostList)
+  } = useQuery(["posts"], postModel.getPostList)
   return (
     <div>
       <PostList isLoading={isLoading} error={error} postList={postList} />

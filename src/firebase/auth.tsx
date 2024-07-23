@@ -13,7 +13,6 @@ import {
   onAuthStateChanged,
   GoogleAuthProvider,
   signInWithPopup,
-  signInWithRedirect,
   User,
 } from "firebase/auth"
 
