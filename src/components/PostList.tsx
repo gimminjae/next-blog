@@ -1,37 +1,25 @@
-import { useAuth } from "@/firebase/auth";
-import { getPostListByUserId, getPostById } from "@/firebase/database";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react"
+import Post from "./post/Post"
+import SkeletonCardList from "./SkeletonCardList"
 
-const PostList = () => {
-  const { user } = useAuth();
-  const [postList, setPostList] = useState<any[]>([]);
-  const getMyPosts = useCallback(async () => {
-    const result = await getPostListByUserId(user ? user.uid : "");
-    console.log("result: ", result);
-    setPostList(result);
-  }, [user]);
-  useEffect(() => {
-    getMyPosts();
-  }, []);
-  useEffect(() => {
-    console.log(postList.entries);
-  }, [postList]);
+interface DataSet {
+  isLoading: Boolean
+  error: any
+  postList: Post[] | any
+}
+const PostList = ({ isLoading, error, postList }: DataSet) => {
   return (
     <>
-      <div>PostList</div>
-      {postList &&
-        postList.length &&
-        postList.map((post: any) => {
-          console.log(post);
-          return (
-            // eslint-disable-next-line react/jsx-key
-            <div>
-              <p>{post[0].title}</p>
-              <p>{post[0].content}</p>
-            </div>
-          );
-        })}
+      {isLoading && <SkeletonCardList length={20} columnNumber={5} />}
+      {error && <p>{error.message}</p>}
+      <div className="grid grid-cols-5 gap-4 place-content-center">
+        {postList &&
+          Array.isArray(postList) &&
+          postList.length &&
+          // eslint-disable-next-line react/jsx-key
+          postList.map((post: Post) => <Post post={post} />)}
+      </div>
     </>
-  );
-};
-export default PostList;
+  )
+}
+export default PostList

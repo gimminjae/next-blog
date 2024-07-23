@@ -1,25 +1,25 @@
-import { useState } from "react";
-import { useRouter } from "next/router";
-import { useAuth } from "@/firebase/auth";
+import { useState } from "react"
+import { useRouter } from "next/router"
+import { useAuth } from "@/firebase/auth"
 
 const SignUp = () => {
-  const { register } = useAuth();
-  const router = useRouter();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const { register } = useAuth()
+  const router = useRouter()
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [error, setError] = useState("")
 
   const handleRegister = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+    event.preventDefault()
     try {
-      await register(email, password);
-      router.push("/");
+      await register(email, password)
+      router.push("/")
     } catch (err) {
       setError(
         "회원가입 실패: 이메일 형식이 올바르지 않거나 비밀번호가 너무 짧습니다."
-      );
+      )
     }
-  };
+  }
 
   return (
     <div>
@@ -47,7 +47,7 @@ const SignUp = () => {
         <button type="submit">회원가입</button>
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default SignUp;
+export default SignUp

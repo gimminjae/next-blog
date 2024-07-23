@@ -1,23 +1,23 @@
-import { useState } from "react";
-import { useRouter } from "next/router";
-import { useAuth } from "@/firebase/auth";
+import { useState } from "react"
+import { useRouter } from "next/router"
+import { useAuth } from "@/firebase/auth"
 
 const Login = () => {
-  const { login, loginWithGoogle } = useAuth();
-  const router = useRouter();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const { login, loginWithGoogle } = useAuth()
+  const router = useRouter()
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [error, setError] = useState("")
 
   const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+    event.preventDefault()
     try {
-      await login(email, password);
-      router.push("/");
+      await login(email, password)
+      router.push("/")
     } catch (err) {
-      setError("로그인 실패: 잘못된 이메일 또는 비밀번호입니다.");
+      setError("로그인 실패: 잘못된 이메일 또는 비밀번호입니다.")
     }
-  };
+  }
 
   return (
     <div>
@@ -46,7 +46,7 @@ const Login = () => {
       </form>
       <button onClick={loginWithGoogle}>Google로 로그인</button>
     </div>
-  );
-};
+  )
+}
 
-export default Login;
+export default Login
