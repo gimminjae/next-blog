@@ -34,7 +34,7 @@ const PostDetail = () => {
       {isLoading && <p>is loading</p>}
       {error && <p>{error.message}</p>}
       {post && (
-        <div>
+        <div className="mx-auto w-1/2">
           <div className="flex justify-between">
             <div className="flex flex-col gap-3">
               <h1 className="text-6xl">{post.title}</h1>
@@ -62,7 +62,7 @@ const PostDetail = () => {
               )}
             </div>
           </div>
-          <div className="sm:container sm:mx-auto">
+          <div>
             <MdViewer content={post.content} />
           </div>
         </div>

@@ -15,7 +15,7 @@ function Layout({ children }: React.PropsWithChildren<{}>) {
   return (
     <>
       <Header />
-      <div className={isPostWritePage ? "" : "sm:container sm:mx-auto"}>
+      <div className={isPostWritePage ? "" : "container mx-auto"}>
         {children}
       </div>
     </>
