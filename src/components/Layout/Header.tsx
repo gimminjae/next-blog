@@ -7,15 +7,15 @@ const Header = () => {
   const { user, loginWithGoogle, logout } = useAuth()
 
   return (
-    <header>
-      <div className="navbar bg-base-100 sticky top-0 z-30">
+    <header className="sticky top-0 z-30">
+      <div className="navbar bg-base-100">
         <div className="navbar-start">
           <Link href="/" className="btn btn-ghost text-xl">
             Dev Diary
           </Link>
         </div>
         <div className="navbar-center lg:flex">
-          <ul className="menu menu-horizontal px-1">
+          <ul className="menu menu-horizontal px-1 flex gap-5">
             <li>
               <Link href="/post">Posts</Link>
             </li>

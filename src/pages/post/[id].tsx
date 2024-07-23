@@ -39,8 +39,8 @@ const PostDetail = () => {
             <div className="flex flex-col gap-3">
               <h1 className="text-6xl">{post.title}</h1>
               <div className="flex gap-5">
-                <div className="badge badge-outline">{post.createdAt}</div>
-                <div className="badge badge-outline">{post.updatedAt}</div>
+                <div className="text-sm text-gray-500">{post.createdAt}</div>
+                <div className="text-sm text-gray-500">{post.updatedAt}</div>
               </div>
             </div>
             <div className="flex items-center">

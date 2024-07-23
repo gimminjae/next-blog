@@ -1,11 +1,11 @@
 interface Props {
-  imageSrc: string;
-  alt: string;
-  title: string;
-  content: string;
-  createdAt: string;
-  btnStr: string;
-  onClick: () => void;
+  imageSrc: string
+  alt: string
+  title: string
+  content: string
+  createdAt: string
+  btnStr: string
+  onClick: () => void
 }
 
 const Card = ({
@@ -20,8 +20,9 @@ const Card = ({
   return (
     <>
       <div className="card bg-base-100 w-sm shadow-xl" onClick={onClick}>
-        <figure>
+        <figure className="px-5 pt-5">
           <img
+            className="rounded-xl"
             src={
               imageSrc
                 ? imageSrc
@@ -34,11 +35,11 @@ const Card = ({
           <h2 className="card-title">{title}</h2>
           <p>{content}</p>
           <div className="card-actions justify-end items-end">
-            <div className="badge badge-outline">{createdAt}</div>
+            <div className="text-sm text-gray-500">{createdAt}</div>
           </div>
         </div>
       </div>
     </>
-  );
-};
-export default Card;
+  )
+}
+export default Card
