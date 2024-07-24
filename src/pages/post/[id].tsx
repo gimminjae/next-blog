@@ -22,6 +22,9 @@ const PostDetail = () => {
     if (!postId) router.push("/post")
   }, [postId])
   const handleDelete = useCallback(() => {
+    if (!confirm("do you delete this post certainly?")) {
+      return
+    }
     const result = postModel.deletePostById(postId)
     router.push("/post")
   }, [user, postId, post])
