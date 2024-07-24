@@ -16,6 +16,7 @@ const EditPostPage = () => {
     title: "",
     content: "",
   })
+  const [isSaving, setIsSaving] = useState(false)
   const handleChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     const { id, name, value } = e.target
     setPost((prev) => ({ ...prev, [id || name]: value }))
@@ -34,6 +35,10 @@ const EditPostPage = () => {
       alert("title, content is empty")
     }
     postModel.updatePost({ ...post, userId: user?.uid as string })
+  }, [post])
+
+  const savePost = useCallback(async () => {
+    await submitPost()
     router.push(`/post/${post.id}`)
   }, [post])
 
@@ -46,6 +51,19 @@ const EditPostPage = () => {
   useEffect(() => {
     getPost()
   }, [])
+
+  useEffect(() => {
+    const interval = setInterval(async () => {
+      if (post.content) {
+        setIsSaving(true)
+        submitPost()
+        console.log("save")
+        setIsSaving(false)
+      }
+    }, 10000) // 10초마다 실행
+
+    return () => clearInterval(interval) // 컴포넌트가 언마운트될 때 인터벌 정리
+  }, [post.content])
   return (
     <>
       <div className="flex flex-col gap-5 my-5">
@@ -66,7 +84,7 @@ const EditPostPage = () => {
               type="file"
               className="file-input file-input-bordered file-input-md w-full max-w-xs"
             />
-            <button className="btn btn-primary" onClick={submitPost}>
+            <button className="btn btn-primary" onClick={savePost}>
               submit
             </button>
           </div>
