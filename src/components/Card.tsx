@@ -1,42 +1,31 @@
 interface Props {
-  imageSrc: string
-  alt: string
   title: string
   content: string
   createdAt: string
-  btnStr: string
+  btnStr?: string
   onClick: () => void
 }
 
 const Card = ({
-  imageSrc,
-  alt,
   title,
   content,
   createdAt = "____-__-__",
-  btnStr = "button",
+  btnStr,
   onClick = () => console.log("click"),
 }: Props) => {
   return (
     <>
-      <div className="card bg-base-100 w-sm shadow-xl" onClick={onClick}>
-        <figure className="px-5 pt-5">
-          <img
-            className="rounded-xl"
-            src={
-              imageSrc
-                ? imageSrc
-                : "https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-            }
-            alt={alt ? alt : "image"}
-          />
-        </figure>
-        <div className="card-body">
+      <div className="card bg-base-100 w-full max-w-96 shadow-xl">
+        <div className="card-body flex flex-cols items-between">
           <h2 className="card-title">{title}</h2>
-          <p>{content}</p>
-          <div className="card-actions justify-end items-end">
-            <div className="text-sm text-gray-500">{createdAt}</div>
+          <div className="text-sm text-gray-500">
+            {createdAt?.substring(0, 16)}
           </div>
+          {btnStr && (
+            <div className="card-actions justify-end">
+              <button className="btn btn-primary">Buy Now</button>
+            </div>
+          )}
         </div>
       </div>
     </>

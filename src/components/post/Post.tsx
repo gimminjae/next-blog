@@ -7,13 +7,10 @@ const Post = (props: { post: Post }) => {
   return (
     <>
       <Card
-        imageSrc=""
-        alt=""
         title={post.title}
         content={""}
         //`${post.content.substring(0, 50)}${"..."}`
         createdAt={post.createdAt as string}
-        btnStr="Detail"
         onClick={() => router.push(`/post/${post.id}`)}
       />
     </>
