@@ -10,7 +10,7 @@ interface DataSet {
 const PostList = ({ isLoading, error, postList }: DataSet) => {
   return (
     <>
-      {isLoading && <SkeletonCardList length={20} columnNumber={5} />}
+      {isLoading && <SkeletonCardList length={20} columnNumber={1} />}
       {error && <p>{error.message}</p>}
       <div className="flex flex-wrap gap-3 place-content-center">
         {postList &&

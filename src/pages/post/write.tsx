@@ -56,16 +56,12 @@ const WritePostPage = () => {
               type="text"
               id="title"
               value={post.title}
+              placeholder="type the title..."
               onChange={handleChange}
             />
           </label>
           <div className="flex gap-3">
-            <div className="whitespace-nowrap">Banner Image</div>
-            <input
-              type="file"
-              className="file-input file-input-bordered file-input-md w-full max-w-xs"
-            />
-            <button className="btn btn-primary" onClick={submitPost}>
+            <button className="btn" onClick={submitPost}>
               submit
             </button>
           </div>

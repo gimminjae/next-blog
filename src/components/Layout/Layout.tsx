@@ -16,11 +16,11 @@ function Layout({ children }: React.PropsWithChildren<{}>) {
     <>
       <Header />
       <div
-        className={
+        className={`${
           isPostWritePage
             ? ""
             : "md:container md:mx-auto xl:container xl:mx-auto sm:container sm:mx-auto"
-        }
+        }`}
       >
         {children}
       </div>

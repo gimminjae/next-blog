@@ -76,17 +76,13 @@ const EditPostPage = () => {
               className="grow"
               type="text"
               id="title"
+              placeholder="type the title..."
               value={post.title}
               onChange={handleChange}
             />
           </label>
           <div className="flex gap-3">
-            <div className="whitespace-nowrap">Banner Image</div>
-            <input
-              type="file"
-              className="file-input file-input-bordered file-input-md w-full max-w-xs"
-            />
-            <button className="btn btn-primary" onClick={savePost}>
+            <button className="btn" onClick={savePost}>
               submit
             </button>
           </div>

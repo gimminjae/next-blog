@@ -38,31 +38,37 @@ const PostDetail = () => {
       {error && <p>{error.message}</p>}
       {post && (
         <div className="mx-auto xl:w-1/2 lg:w-3/5">
-          <div className="flex justify-between">
+          <div className="">
             <div className="flex flex-col gap-3">
               <h1 className="text-6xl">{post.title}</h1>
-              <div className="flex gap-5">
-                <div className="text-sm text-gray-500">{post.createdAt}</div>
-                <div className="text-sm text-gray-500">{post.updatedAt}</div>
-              </div>
             </div>
-            <div className="flex items-center">
-              {user?.uid === post.userId && (
-                <>
-                  <button
-                    className="btn btn-active btn-sm btn-link"
-                    onClick={pushEditPost}
-                  >
-                    update
-                  </button>
-                  <button
-                    className="btn btn-active btn-sm btn-link"
-                    onClick={handleDelete}
-                  >
-                    delete
-                  </button>
-                </>
-              )}
+            <div className="flex justify-between">
+              <div className="flex gap-5 items-center">
+                <div className="text-sm text-gray-500">
+                  {post.createdAt?.substring(0, 16)}
+                </div>
+                <div className="text-sm text-gray-500">
+                  {post.updatedAt?.substring(0, 16)}
+                </div>
+              </div>
+              <div className="flex">
+                {user?.uid === post.userId && (
+                  <>
+                    <button
+                      className="btn btn-active btn-sm btn-link"
+                      onClick={pushEditPost}
+                    >
+                      update
+                    </button>
+                    <button
+                      className="btn btn-active btn-sm btn-link"
+                      onClick={handleDelete}
+                    >
+                      delete
+                    </button>
+                  </>
+                )}
+              </div>
             </div>
           </div>
           <div>
