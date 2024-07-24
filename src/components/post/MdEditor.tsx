@@ -42,7 +42,8 @@ const MdEditor = ({ value, onChange }: any) => {
       files.map(async (file) => {
         const url = await store.uploadImage(file)
         const insertedMarkdown = insertToTextArea(
-          `<img src="${url}" alt="image" width=600 />`
+          `![](${url})`
+          //   `<img src="${url}" alt="image" width=600 />`
         )
         if (!insertedMarkdown) {
           return

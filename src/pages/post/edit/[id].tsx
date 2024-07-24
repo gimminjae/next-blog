@@ -30,9 +30,11 @@ const EditPostPage = () => {
   const submitPost = useCallback(() => {
     if (!user) {
       alert("로그인 필요")
+      return
     }
     if (!post.title.trim() || !post.content.trim()) {
       alert("title, content is empty")
+      return
     }
     postModel.updatePost({ ...post, userId: user?.uid as string })
   }, [post])
