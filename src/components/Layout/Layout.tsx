@@ -1,4 +1,3 @@
-import Link from "next/link"
 import React, { ReactNode, useEffect, useMemo } from "react"
 import Header from "./Header"
 import { useRouter } from "next/router"
@@ -16,7 +15,7 @@ function Layout({ children }: React.PropsWithChildren<{}>) {
     <>
       <Header />
       <div
-        className={`${
+        className={`animate-fade-up ${
           isPostWritePage
             ? ""
             : "md:container md:mx-auto xl:container xl:mx-auto sm:container sm:mx-auto"

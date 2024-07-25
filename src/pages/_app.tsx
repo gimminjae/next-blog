@@ -11,15 +11,13 @@ import { store } from "@/components/LoadingState"
 function MyApp({ Component, pageProps }: AppProps) {
   const queryClient = new QueryClient()
   const [loading, setLoading] = useState<Boolean>(false)
-  store.subscribe(() => {
-    setLoading(store.getState().value)
-  })
+  store.subscribe(() => setLoading(store.getState().value))
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
         <MyProvider store={store}>
+          <Loading loading={loading} color="info" size="lg" type="spinner" />
           <Layout>
-            <Loading loading={loading} color="info" size="lg" type="spinner" />
             <Component {...pageProps} />
           </Layout>
         </MyProvider>

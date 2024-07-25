@@ -21,19 +21,16 @@ const Loading = ({
   size = "md",
   color = undefined,
 }: Props) => {
-  useEffect(() => {
-    console.log("loading: ", loading)
-  }, [loading])
   return (
     <>
       {loading && (
-        <div className="absolute fixed inset-0 flex items-center justify-center bg-gray-100 z-100">
+        <span className="absolute fixed inset-0 flex items-center justify-center z-100">
           <span
             className={`loading loading-${type} loading-${size} ${
               color ? `text-${color}` : ""
             }`}
           ></span>
-        </div>
+        </span>
       )}
     </>
   )
