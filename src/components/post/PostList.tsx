@@ -9,7 +9,7 @@ const PostList = ({ error, postList }: DataSet) => {
   return (
     <>
       {error && <p>{error.message}</p>}
-      <div className="flex flex-col gap-3 place-content-center animate-fade-up">
+      <div className="grid grid-cols-1 mx-auto gap-3 whitespace-nowrap animate-fade-up xl:place-items-center">
         {postList &&
           Array.isArray(postList) &&
           postList.length &&

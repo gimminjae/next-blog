@@ -15,10 +15,7 @@ const Card = ({
 }: Props) => {
   return (
     <>
-      <div
-        className="card bg-base-100 w-full max-w-96 shadow-xl"
-        onClick={onClick}
-      >
+      <div className="card bg-base-100 shadow-xl xl:w-2/3" onClick={onClick}>
         <div className="card-body flex flex-cols items-between">
           <h2 className="card-title">{title}</h2>
           <div className="text-sm text-gray-500">
