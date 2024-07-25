@@ -1,4 +1,4 @@
-import PostList from "@/components/PostList"
+import PostList from "@/components/post/PostList"
 import { postModel } from "@/firebase/database"
 import React from "react"
 import { useQuery } from "react-query"

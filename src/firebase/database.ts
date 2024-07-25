@@ -12,7 +12,7 @@ import {
   equalTo,
 } from "firebase/database"
 import { v4 as uuidv4 } from "uuid"
-import { loadingActions, store } from "@/components/LoadingState"
+import { loadingActions, store } from "@/store//LoadingState"
 
 const getUuid = () => {
   const uuid = uuidv4()

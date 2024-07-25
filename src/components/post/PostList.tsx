@@ -1,6 +1,5 @@
-import React, { useCallback, useEffect, useState } from "react"
-import Post from "./post/Post"
-import SkeletonCardList from "./SkeletonCardList"
+import React from "react"
+import Post from "./Post"
 
 interface DataSet {
   error: any

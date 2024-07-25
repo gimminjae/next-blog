@@ -1,4 +1,4 @@
-import { loadingActions, store } from "@/components/LoadingState"
+import { loadingActions, store } from "@/store/LoadingState"
 import { useAuth } from "@/firebase/auth"
 import { postModel } from "@/firebase/database"
 import dynamic from "next/dynamic"
@@ -10,13 +10,24 @@ const MdViewer = dynamic(() => import("@/components/post/MdViewer"), {
   ssr: false,
 })
 
-const PostDetail = () => {
+export async function getServerSideProps(context: any) {
+  const { params } = context
+  try {
+    const post = await postModel.getPostById(params.id)
+    return {
+      props: { post },
+    }
+  } catch (error) {
+    return {
+      props: { error },
+    }
+  }
+}
+
+const PostDetail = ({ post, error }: any) => {
   const router = useRouter()
   const { user } = useAuth()
   const postId = useMemo(() => router.query.id as string, [router])
-  const { error, data: post } = useQuery<Post, Error>(["post"], () =>
-    postModel.getPostById(postId)
-  )
   useEffect(() => {
     if (!postId) router.push("/post")
   }, [postId])

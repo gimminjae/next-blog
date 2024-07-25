@@ -1,5 +1,5 @@
 import { useRouter } from "next/router"
-import Card from "../Card"
+import Card from "../common/Card"
 
 const Post = (props: { post: Post }) => {
   const { post } = props

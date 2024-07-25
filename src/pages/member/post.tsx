@@ -1,7 +1,7 @@
 import { useAuth } from "@/firebase/auth"
 import { postModel } from "@/firebase/database"
 import { useQuery } from "react-query"
-import PostList from "@/components/PostList"
+import PostList from "@/components/post/PostList"
 
 const UsersPostList = () => {
   const { user } = useAuth()

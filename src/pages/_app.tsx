@@ -4,9 +4,10 @@ import { AuthProvider } from "@/firebase/auth"
 import Layout from "@/components/Layout/Layout"
 import React, { useEffect, useState } from "react"
 import { QueryClient, QueryClientProvider } from "react-query"
-import Loading from "@/components/Loading"
+import Loading from "@/components/common/Loading"
 import { Provider as MyProvider } from "react-redux"
-import { store } from "@/components/LoadingState"
+import { store } from "@/store/LoadingState"
+// import { DefaultSeo } from "next-seo"
 
 function MyApp({ Component, pageProps }: AppProps) {
   const queryClient = new QueryClient()
@@ -16,6 +17,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
         <MyProvider store={store}>
+          {/* <DefaultSeo /> */}
           <Loading loading={loading} color="info" size="lg" type="spinner" />
           <Layout>
             <Component {...pageProps} />
