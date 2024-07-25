@@ -16,7 +16,6 @@ const EditPostPage = () => {
     title: "",
     content: "",
   })
-  const [isSaving, setIsSaving] = useState(false)
   const handleChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     const { id, name, value } = e.target
     setPost((prev) => ({ ...prev, [id || name]: value }))
@@ -57,10 +56,8 @@ const EditPostPage = () => {
   useEffect(() => {
     const interval = setInterval(async () => {
       if (post.content) {
-        setIsSaving(true)
         submitPost()
         console.log("save")
-        setIsSaving(false)
       }
     }, 10000) // 10초마다 실행
 

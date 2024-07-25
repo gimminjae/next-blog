@@ -1,7 +1,7 @@
 import Link from "next/link"
 import React from "react"
 
-const Profile = () => {
+const MyPage = () => {
   return (
     <div>
       <h1>Profile</h1>
@@ -9,4 +9,4 @@ const Profile = () => {
     </div>
   )
 }
-export default Profile
+export default MyPage
