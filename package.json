@@ -17,6 +17,7 @@
     "react": "^18",
     "react-dom": "^18",
     "react-query": "^3.39.3",
+    "tailwindcss-animated": "^1.1.2",
     "uuid": "^10.0.0"
   },
   "devDependencies": {
