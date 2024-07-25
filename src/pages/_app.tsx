@@ -7,7 +7,6 @@ import { QueryClient, QueryClientProvider } from "react-query"
 import Loading from "@/components/common/Loading"
 import { Provider as MyProvider } from "react-redux"
 import { store } from "@/store/LoadingState"
-// import { DefaultSeo } from "next-seo"
 
 function MyApp({ Component, pageProps }: AppProps) {
   const queryClient = new QueryClient()
@@ -17,7 +16,6 @@ function MyApp({ Component, pageProps }: AppProps) {
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
         <MyProvider store={store}>
-          {/* <DefaultSeo /> */}
           <Loading loading={loading} color="info" size="lg" type="spinner" />
           <Layout>
             <Component {...pageProps} />
