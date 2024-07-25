@@ -3,16 +3,14 @@ import Post from "./post/Post"
 import SkeletonCardList from "./SkeletonCardList"
 
 interface DataSet {
-  isLoading: Boolean
   error: any
   postList: Post[] | any
 }
-const PostList = ({ isLoading, error, postList }: DataSet) => {
+const PostList = ({ error, postList }: DataSet) => {
   return (
     <>
-      {isLoading && <SkeletonCardList length={20} columnNumber={1} />}
       {error && <p>{error.message}</p>}
-      <div className="flex flex-col gap-3 place-content-center">
+      <div className="flex flex-col gap-3 place-content-center animate-fade-up">
         {postList &&
           Array.isArray(postList) &&
           postList.length &&

@@ -12,6 +12,7 @@ import {
   equalTo,
 } from "firebase/database"
 import { v4 as uuidv4 } from "uuid"
+import { loadingActions, store } from "@/components/LoadingState"
 
 const getUuid = () => {
   const uuid = uuidv4()
@@ -37,6 +38,7 @@ export const postModel = {
   },
 
   async getPostById(id: string) {
+    store.dispatch(loadingActions.loading())
     const result = await get(child(ref(db), `posts/${id}`))
       .then((snapshot) => {
         if (snapshot.exists()) {
@@ -48,10 +50,12 @@ export const postModel = {
       .catch((error) => {
         console.error(error)
       })
+    store.dispatch(loadingActions.complete())
     return result
   },
 
   async getPostListByUserId(userId: string) {
+    store.dispatch(loadingActions.loading())
     try {
       const snapshot = await get(
         query(ref(db, "posts"), orderByChild("userId"), equalTo(userId))
@@ -59,10 +63,13 @@ export const postModel = {
       return Object.values(snapshot.val())
     } catch (error) {
       console.log(error)
+    } finally {
+      store.dispatch(loadingActions.complete())
     }
   },
 
   async getPostList() {
+    store.dispatch(loadingActions.loading())
     try {
       const snapshot = await get(
         query(ref(db, "posts"), orderByChild("createdAtTimeStamp"))
@@ -70,6 +77,8 @@ export const postModel = {
       return snapshot.exists() ? Object.values(snapshot.val()) : []
     } catch (error) {
       console.log(error)
+    } finally {
+      store.dispatch(loadingActions.complete())
     }
   },
 

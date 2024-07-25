@@ -5,17 +5,13 @@ import PostList from "@/components/PostList"
 
 const UsersPostList = () => {
   const { user } = useAuth()
-  const {
-    isLoading,
-    error,
-    data: postList,
-  } = useQuery(["posts"], () =>
+  const { error, data: postList } = useQuery(["posts"], () =>
     postModel.getPostListByUserId(user?.uid as string)
   )
   return (
     <>
       <h1 className="text-5xl mx-3 my-3">My Post</h1>
-      <PostList isLoading={isLoading} error={error} postList={postList} />
+      <PostList error={error} postList={postList} />
     </>
   )
 }

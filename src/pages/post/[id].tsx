@@ -1,3 +1,4 @@
+import { loadingActions, store } from "@/components/LoadingState"
 import { useAuth } from "@/firebase/auth"
 import { postModel } from "@/firebase/database"
 import dynamic from "next/dynamic"
@@ -34,7 +35,6 @@ const PostDetail = () => {
   }, [router, postId])
   return (
     <>
-      {isLoading && <p>is loading</p>}
       {error && <p>{error.message}</p>}
       {post && (
         <div className="mx-auto xl:w-1/2 lg:w-3/5 animate-fade-up">
