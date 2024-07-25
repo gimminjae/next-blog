@@ -4,14 +4,10 @@ import React from "react"
 import { useQuery } from "react-query"
 
 const PostPage = () => {
-  const {
-    isLoading,
-    error,
-    data: postList,
-  } = useQuery(["posts"], postModel.getPostList)
+  const { error, data: postList } = useQuery(["posts"], postModel.getPostList)
   return (
     <div>
-      <PostList isLoading={isLoading} error={error} postList={postList} />
+      <PostList error={error} postList={postList} />
     </div>
   )
 }

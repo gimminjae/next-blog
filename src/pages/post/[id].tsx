@@ -14,11 +14,9 @@ const PostDetail = () => {
   const router = useRouter()
   const { user } = useAuth()
   const postId = useMemo(() => router.query.id as string, [router])
-  const {
-    isLoading,
-    error,
-    data: post,
-  } = useQuery<Post, Error>(["post"], () => postModel.getPostById(postId))
+  const { error, data: post } = useQuery<Post, Error>(["post"], () =>
+    postModel.getPostById(postId)
+  )
   useEffect(() => {
     if (!postId) router.push("/post")
   }, [postId])
