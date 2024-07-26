@@ -21,16 +21,14 @@ const getUuid = () => {
 }
 
 export const postModel = {
-  async writePost({ userId, title, content }: Post) {
+  async writePost(post: Post) {
     const id = getUuid()
     const now = new Date()
     const nowStr = util.getFormattedDateTime(now)
     const nowStamp = util.getDateTimeStamp(now)
     set(ref(db, `posts/${id}`), {
+      ...post,
       id: id,
-      userId: userId,
-      title: title,
-      content: content,
       createdAt: nowStr,
       updatedAt: nowStr,
       createdAtTimeStamp: nowStamp,
