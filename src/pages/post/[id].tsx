@@ -1,10 +1,9 @@
-import { loadingActions, store } from "@/store/LoadingState"
 import { useAuth } from "@/firebase/auth"
 import { postModel } from "@/firebase/database"
 import dynamic from "next/dynamic"
 import { useRouter } from "next/router"
 import { useCallback, useEffect, useMemo } from "react"
-import { useQuery } from "react-query"
+import { FaPenToSquare, FaRegTrashCan } from "react-icons/fa6"
 
 const MdViewer = dynamic(() => import("@/components/post/MdViewer"), {
   ssr: false,
@@ -47,7 +46,7 @@ const PostDetail = ({ post, error }: any) => {
       {error && <p>{error.message}</p>}
       {post && (
         <div className="mx-auto xl:w-1/2 lg:w-3/5 animate-fade-up">
-          <div className="">
+          <div className="flex flex-col gap-5">
             <div className="flex flex-col gap-3">
               <h1 className="text-6xl">{post.title}</h1>
             </div>
@@ -67,12 +66,14 @@ const PostDetail = ({ post, error }: any) => {
                       className="btn btn-active btn-sm btn-link"
                       onClick={pushEditPost}
                     >
+                      <FaPenToSquare />
                       update
                     </button>
                     <button
                       className="btn btn-active btn-sm btn-link"
                       onClick={handleDelete}
                     >
+                      <FaRegTrashCan />
                       delete
                     </button>
                   </>

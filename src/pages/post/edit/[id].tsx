@@ -3,6 +3,7 @@ import { postModel } from "@/firebase/database"
 import dynamic from "next/dynamic"
 import { useRouter } from "next/router"
 import React, { ChangeEvent, useCallback, useEffect, useState } from "react"
+import { FaPenToSquare } from "react-icons/fa6"
 
 const MdEditor = dynamic(() => import("@/components/post/MdEditor"), {
   ssr: false,
@@ -13,6 +14,7 @@ const EditPostPage = () => {
   const router = useRouter()
   const [post, setPost] = useState<Post>({
     userId: "",
+    userEmail: "",
     title: "",
     content: "",
   })
@@ -80,7 +82,7 @@ const EditPostPage = () => {
           </label>
           <div className="flex gap-3">
             <button className="btn" onClick={savePost}>
-              submit
+              <FaPenToSquare />
             </button>
           </div>
         </div>

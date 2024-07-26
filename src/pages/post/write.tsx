@@ -2,13 +2,8 @@ import { useAuth } from "@/firebase/auth"
 import { postModel } from "@/firebase/database"
 import dynamic from "next/dynamic"
 import { useRouter } from "next/router"
-import React, {
-  ChangeEvent,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react"
+import React, { ChangeEvent, useCallback, useState } from "react"
+import { FaPenToSquare } from "react-icons/fa6"
 
 const MdEditor = dynamic(() => import("@/components/post/MdEditor"), {
   ssr: false,
@@ -67,7 +62,7 @@ const WritePostPage = () => {
           </label>
           <div className="flex gap-3">
             <button className="btn" onClick={submitPost}>
-              submit
+              <FaPenToSquare />
             </button>
           </div>
         </div>

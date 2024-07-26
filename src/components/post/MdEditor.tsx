@@ -1,7 +1,6 @@
 import { store } from "@/firebase/storage"
 import MDEditor from "@uiw/react-md-editor"
-import { useState, useCallback, ChangeEvent, SetStateAction } from "react"
-import Loading from "../common/Loading"
+import { SetStateAction } from "react"
 
 const MdEditor = ({ value, onChange }: any) => {
   const insertToTextArea = (intsertString: string) => {
