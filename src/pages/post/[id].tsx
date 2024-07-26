@@ -47,11 +47,13 @@ const PostDetail = ({ post, error }: any) => {
       {post && (
         <div className="mx-auto xl:w-1/2 lg:w-3/5 animate-fade-up">
           <div className="flex flex-col gap-5">
-            <div className="flex justify-between gap-3">
+            <div>
+              <div className="flex justify-end">
+                <span className="text-gray-500 whitespace-nowrap">
+                  <strong>By</strong> {post.userEmail || "unknown"}
+                </span>
+              </div>
               <h1 className="text-6xl">{post.title}</h1>
-              <span className="text-gray-500 whitespace-nowrap">
-                <strong>By</strong> {post.userEmail || "unknown"}
-              </span>
             </div>
             <div className="flex justify-between">
               <div className="flex gap-5 items-center">
