@@ -1,5 +1,5 @@
 import { useRouter } from "next/router"
-import Card from "../common/Card"
+import Card from "./Card"
 import { useMemo } from "react"
 import RemoveMarkdown from "remove-markdown"
 
