@@ -20,6 +20,7 @@ const WritePostPage = () => {
 
   const [post, setPost] = useState<Post>({
     userId: "",
+    userEmail: "",
     title: "",
     content: "",
   })
@@ -42,7 +43,11 @@ const WritePostPage = () => {
       alert("title, content is empty")
       return
     }
-    postModel.writePost({ ...post, userId: user?.uid as string })
+    postModel.writePost({
+      ...post,
+      userId: user?.uid!!,
+      userEmail: user?.email!!,
+    })
     router.push("/post")
   }, [post])
   return (

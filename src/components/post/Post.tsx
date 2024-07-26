@@ -15,6 +15,7 @@ const Post = (props: { post: Post }) => {
       <Card
         title={post.title}
         content={`${RemoveMarkdown(post.content).substring(0, 200)}....`}
+        author={post.userEmail}
         createdAt={post.createdAt as string}
         onClick={() => router.push(`/post/${post.id}`)}
       />
