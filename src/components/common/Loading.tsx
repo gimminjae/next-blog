@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import React, { useEffect } from "react"
 
 interface Props {
   loading: Boolean
@@ -35,4 +35,4 @@ const Loading = ({
     </>
   )
 }
-export default Loading
+export default React.memo(Loading)

@@ -3,7 +3,7 @@ import { postModel } from "@/firebase/database"
 import dynamic from "next/dynamic"
 import { useRouter } from "next/router"
 import React, { ChangeEvent, useCallback, useEffect, useState } from "react"
-import { FaPenToSquare } from "react-icons/fa6"
+import { FaPenToSquare, FaArrowRotateLeft } from "react-icons/fa6"
 
 const MdEditor = dynamic(() => import("@/components/post/MdEditor"), {
   ssr: false,
@@ -18,10 +18,14 @@ const EditPostPage = () => {
     title: "",
     content: "",
   })
+
+  const [firstContent, setFirstContent] = useState<string>("")
+
   const handleChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     const { id, name, value } = e.target
     setPost((prev) => ({ ...prev, [id || name]: value }))
   }, [])
+
   const setContent = useCallback((value: string) => {
     handleChange({
       target: { id: "content", name: "content", value },
@@ -45,10 +49,15 @@ const EditPostPage = () => {
     router.push(`/post/${post.id}`)
   }, [post])
 
+  const resetPost = useCallback(() => {
+    setContent(firstContent)
+  }, [firstContent])
+
   const getPost = useCallback(async () => {
     const postId = router.query.id
     const apiPost = await postModel.getPostById(postId as string)
     setPost(apiPost)
+    setFirstContent(apiPost.content)
   }, [router])
 
   useEffect(() => {
@@ -81,6 +90,9 @@ const EditPostPage = () => {
             />
           </label>
           <div className="flex gap-3">
+            <button className="btn" onClick={resetPost}>
+              <FaArrowRotateLeft />
+            </button>
             <button className="btn" onClick={savePost}>
               <FaPenToSquare />
             </button>

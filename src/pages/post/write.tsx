@@ -4,6 +4,7 @@ import dynamic from "next/dynamic"
 import { useRouter } from "next/router"
 import React, { ChangeEvent, useCallback, useState } from "react"
 import { FaPenToSquare } from "react-icons/fa6"
+import Button from "../../components/common/Button"
 
 const MdEditor = dynamic(() => import("@/components/post/MdEditor"), {
   ssr: false,
@@ -61,9 +62,9 @@ const WritePostPage = () => {
             />
           </label>
           <div className="flex gap-3">
-            <button className="btn" onClick={submitPost}>
+            <Button onClick={submitPost}>
               <FaPenToSquare />
-            </button>
+            </Button>
           </div>
         </div>
         <div>
