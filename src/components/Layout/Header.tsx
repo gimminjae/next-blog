@@ -8,9 +8,11 @@ import {
   FaArrowRightFromBracket,
   FaHouse,
 } from "react-icons/fa6"
+import { useAlert } from "@/store/AlertState"
 
 const Header = () => {
   const { user, loginWithGoogle, logout } = useAuth()
+  const { alert } = useAlert()
 
   return (
     <header className="sticky top-0 z-30">
@@ -19,6 +21,18 @@ const Header = () => {
           <Link href="/post" className="btn btn-ghost text-xl">
             Dev Diary
           </Link>
+          <button
+            onClick={() => {
+              alert({
+                time: 5,
+                content: "alert test",
+                description: "test description",
+                type: "info",
+              })
+            }}
+          >
+            button
+          </button>
         </div>
         <div className="navbar-end">
           {!user && (

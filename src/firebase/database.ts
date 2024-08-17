@@ -11,18 +11,11 @@ import {
   query,
   equalTo,
 } from "firebase/database"
-import { v4 as uuidv4 } from "uuid"
 import { loadingActions, store } from "@/store//LoadingState"
-
-const getUuid = () => {
-  const uuid = uuidv4()
-  const tokens = uuid.split("-")
-  return tokens[2] + tokens[1] + tokens[0] + tokens[3] + tokens[4]
-}
 
 export const postModel = {
   async writePost(post: Post) {
-    const id = getUuid()
+    const id = util.getUuid()
     const now = new Date()
     const nowStr = util.getFormattedDateTime(now)
     const nowStamp = util.getDateTimeStamp(now)
