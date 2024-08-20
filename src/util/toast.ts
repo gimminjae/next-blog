@@ -1,10 +1,59 @@
-import { ToastSettingState } from "@/store/ToastSetting"
 import { toast, ToastContent } from "react-toastify"
 
-const alert = {
-  toast: (message: string, option: ToastSettingState) =>
-    toast<ToastContent<ToastSettingState>>(message, option),
-  info: (message: string, option: ToastSettingState) =>
-    toast.info(message, option),
+export interface ToastSettingState {
+  position:
+    | "top-left"
+    | "top-right"
+    | "top-center"
+    | "bottom-left"
+    | "bottom-right"
+    | "bottom-center"
+  autoClose: number
+  hideProgressBar: boolean
+  closeOnClick: boolean
+  pauseOnHover: boolean
+  draggable: true
+  progress: any
+  theme: "light" | "dark" | "colored"
+  transition: any
 }
-export default toast
+
+const initialSetting: ToastSettingState = {
+  position: "top-right",
+  autoClose: 5000,
+  hideProgressBar: false,
+  closeOnClick: true,
+  pauseOnHover: true,
+  draggable: true,
+  progress: null,
+  theme: "light",
+  transition: null,
+}
+
+const alert = (message: string) =>
+  toast<ToastContent<ToastSettingState>>(message, initialSetting)
+
+const info = (message: string) =>
+  toast<ToastContent<ToastSettingState>>(message, {
+    ...initialSetting,
+    type: "info",
+  })
+
+const error = (message: string) =>
+  toast<ToastContent<ToastSettingState>>(message, {
+    ...initialSetting,
+    type: "error",
+  })
+
+const warning = (message: string) =>
+  toast<ToastContent<ToastSettingState>>(message, {
+    ...initialSetting,
+    type: "warning",
+  })
+
+const success = (message: string) =>
+  toast<ToastContent<ToastSettingState>>(message, {
+    ...initialSetting,
+    type: "success",
+  })
+export { alert, info, error, warning, success }

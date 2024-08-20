@@ -8,11 +8,9 @@ import {
   FaArrowRightFromBracket,
   FaHouse,
 } from "react-icons/fa6"
-import { useAlert } from "@/store/AlertState"
 
 const Header = () => {
   const { user, loginWithGoogle, logout } = useAuth()
-  const { alert } = useAlert()
 
   return (
     <header className="sticky top-0 z-30">
