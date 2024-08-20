@@ -1,5 +1,6 @@
 import { useAuth } from "@/firebase/auth"
 import { postModel } from "@/firebase/database"
+import { error, info, success, warning } from "@/util/toast"
 import dynamic from "next/dynamic"
 import { useRouter } from "next/router"
 import React, { ChangeEvent, useCallback, useEffect, useState } from "react"
@@ -34,11 +35,11 @@ const EditPostPage = () => {
 
   const submitPost = useCallback(() => {
     if (!user) {
-      alert("로그인 필요")
+      error("로그인 필요")
       return
     }
     if (!post.title.trim() || !post.content.trim()) {
-      alert("title, content is empty")
+      warning("제목 혹은 내용이 없습니다.\nTitle, content is empty.")
       return
     }
     postModel.updatePost({ ...post, userId: user?.uid as string })
@@ -46,11 +47,13 @@ const EditPostPage = () => {
 
   const savePost = useCallback(async () => {
     await submitPost()
+    success("글이 수정되었습니다.\nPost is modified.")
     router.push(`/post/${post.id}`)
   }, [post])
 
   const resetPost = useCallback(() => {
     setContent(firstContent)
+    info("초기화되었습니다.\nInitialized successfully")
   }, [firstContent])
 
   const getPost = useCallback(async () => {
@@ -68,9 +71,9 @@ const EditPostPage = () => {
     const interval = setInterval(async () => {
       if (post.content) {
         submitPost()
-        console.log("save")
+        info("임시저장되었습니다.\nSaved temporary successfully")
       }
-    }, 10000) // 10초마다 실행
+    }, 15000) // 15초마다 실행
 
     return () => clearInterval(interval) // 컴포넌트가 언마운트될 때 인터벌 정리
   }, [post.content])

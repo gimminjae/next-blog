@@ -1,5 +1,6 @@
 import { useAuth } from "@/firebase/auth"
 import { postModel } from "@/firebase/database"
+import { success } from "@/util/toast"
 import dynamic from "next/dynamic"
 import { useRouter } from "next/router"
 import { useCallback, useEffect, useMemo } from "react"
@@ -35,6 +36,7 @@ const PostDetail = ({ post, error }: any) => {
       return
     }
     const result = postModel.deletePostById(postId)
+    success("삭제되었습니다.\nPost is deleted.")
     router.push("/post")
   }, [user, postId, post])
 

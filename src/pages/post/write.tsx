@@ -5,6 +5,7 @@ import { useRouter } from "next/router"
 import React, { ChangeEvent, useCallback, useState } from "react"
 import { FaPenToSquare } from "react-icons/fa6"
 import Button from "../../components/common/Button"
+import { success, warning } from "@/util/toast"
 
 const MdEditor = dynamic(() => import("@/components/post/MdEditor"), {
   ssr: false,
@@ -36,7 +37,7 @@ const WritePostPage = () => {
       return
     }
     if (!post.title.trim() || !post.content.trim()) {
-      alert("title, content is empty")
+      warning("제목 혹은 내용이 없습니다.\nTitle, content is empty.")
       return
     }
     postModel.writePost({
@@ -44,6 +45,7 @@ const WritePostPage = () => {
       userId: user?.uid!!,
       userEmail: user?.email!!,
     })
+    success("글이 작성되었습니다.\nPost is written.")
     router.push("/post")
   }, [post])
   return (
