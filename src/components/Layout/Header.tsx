@@ -19,18 +19,6 @@ const Header = () => {
           <Link href="/post" className="btn btn-ghost text-xl">
             Dev Diary
           </Link>
-          <button
-            onClick={() => {
-              alert({
-                time: 5,
-                content: "alert test",
-                description: "test description",
-                type: "info",
-              })
-            }}
-          >
-            button
-          </button>
         </div>
         <div className="navbar-end">
           {!user && (
