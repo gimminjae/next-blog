@@ -18,7 +18,10 @@ const Card = ({
 }: Props) => {
   return (
     <>
-      <div className="card bg-base-100 shadow-xl xl:w-2/3" onClick={onClick}>
+      <div
+        className="card bg-base-100 shadow-xl xl:w-2/3 cursor-pointer"
+        onClick={onClick}
+      >
         <div className="card-body flex flex-cols items-between">
           <h2 className="card-title">
             <FaRegFileLines />
