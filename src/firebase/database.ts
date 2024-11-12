@@ -51,9 +51,11 @@ export const postModel = {
       const snapshot = await get(
         query(ref(db, "posts"), orderByChild("userId"), equalTo(userId))
       )
-      return Object.values(snapshot.val())
+      const result = snapshot?.val()
+      return result ? Object.values(result) : []
     } catch (error) {
       console.log(error)
+      return []
     } finally {
       store.dispatch(loadingActions.complete())
     }

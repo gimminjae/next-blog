@@ -1,4 +1,4 @@
-import React from "react"
+import React, { memo } from "react"
 import Post from "./Post"
 
 interface DataSet {
@@ -12,11 +12,13 @@ const PostList = ({ error, postList }: DataSet) => {
       <div className="grid grid-cols-1 mx-auto gap-3 animate-fade-up xl:place-items-center">
         {postList &&
           Array.isArray(postList) &&
-          postList.length &&
+          postList?.length > 0 &&
           // eslint-disable-next-line react/jsx-key
-          postList.map((post: Post) => <Post post={post} />)}
+          postList.map((post: Post, index: number) => (
+            <Post key={index} post={post} />
+          ))}
       </div>
     </>
   )
 }
-export default PostList
+export default memo(PostList)

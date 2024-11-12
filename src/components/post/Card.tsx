@@ -1,3 +1,4 @@
+import { memo } from "react"
 import { FaRegFileLines } from "react-icons/fa6"
 interface Props {
   title: string
@@ -44,4 +45,4 @@ const Card = ({
     </>
   )
 }
-export default Card
+export default memo(Card)
