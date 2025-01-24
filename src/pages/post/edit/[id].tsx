@@ -77,6 +77,7 @@ const EditPostPage = () => {
 
     return () => clearInterval(interval) // 컴포넌트가 언마운트될 때 인터벌 정리
   }, [post.content])
+
   return (
     <>
       <div className="flex flex-col gap-5 my-5">

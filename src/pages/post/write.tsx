@@ -21,10 +21,12 @@ const WritePostPage = () => {
     title: "",
     content: "",
   })
+
   const handleChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     const { id, name, value } = e.target
     setPost((prev) => ({ ...prev, [id || name]: value }))
   }, [])
+
   const setContent = useCallback((value: string) => {
     handleChange({
       target: { id: "content", name: "content", value },
@@ -48,6 +50,7 @@ const WritePostPage = () => {
     success("글이 작성되었습니다.\nPost is written.")
     router.push("/post")
   }, [post])
+
   return (
     <>
       <div className="flex flex-col gap-5 my-5">

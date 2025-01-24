@@ -9,6 +9,8 @@ import { Provider as MyProvider } from "react-redux"
 import { store } from "@/store/LoadingState"
 import { ToastContainer } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
+import { PrimeReactProvider } from "primereact/api"
+import "primereact/resources/themes/lara-light-cyan/theme.css"
 
 function MyApp({ Component, pageProps }: AppProps) {
   const queryClient = new QueryClient()
@@ -17,13 +19,15 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
-        <MyProvider store={store}>
-          <Loading loading={loading} color="info" size="lg" type="spinner" />
-          <ToastContainer />
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
-        </MyProvider>
+        <PrimeReactProvider>
+          <MyProvider store={store}>
+            <Loading loading={loading} color="info" size="lg" type="spinner" />
+            <ToastContainer />
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+          </MyProvider>
+        </PrimeReactProvider>
       </AuthProvider>
     </QueryClientProvider>
   )

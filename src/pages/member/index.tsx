@@ -18,9 +18,12 @@ const MyPage = () => {
   useEffect(() => {
     refetch()
   }, [user?.uid])
+
   return (
     <div>
-      <h1 className="font-5xl">My Page</h1>
+      <div className="mx-auto my-10 w-[70%]">
+        <h1 className="text-5xl">마이페이지</h1>
+      </div>
       <PostList error={error} postList={postList} />
     </div>
   )

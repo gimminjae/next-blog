@@ -28,9 +28,7 @@ const PostDetail = ({ post, error }: any) => {
   const router = useRouter()
   const { user } = useAuth()
   const postId = useMemo(() => router.query.id as string, [router])
-  useEffect(() => {
-    if (!postId) router.push("/post")
-  }, [postId])
+
   const handleDelete = useCallback(() => {
     if (!confirm("do you delete this post certainly?")) {
       return
@@ -43,6 +41,11 @@ const PostDetail = ({ post, error }: any) => {
   const pushEditPost = useCallback(() => {
     router.push(`/post/edit/${postId}`)
   }, [router, postId])
+
+  useEffect(() => {
+    if (!postId) router.push("/post")
+  }, [postId])
+
   return (
     <>
       {error && <p>{error.message}</p>}
