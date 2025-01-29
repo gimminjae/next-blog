@@ -28,6 +28,22 @@ export const postModel = {
     })
   },
 
+  async getPostListByUserEmail(email: string) {
+    store.dispatch(loadingActions.loading())
+    try {
+      const snapshot = await get(
+        query(ref(db, "posts"), orderByChild("userEmail"), equalTo(email))
+      )
+      const result = snapshot?.val()
+      return result ? Object.values(result) : []
+    } catch (error) {
+      console.log(error)
+      return []
+    } finally {
+      store.dispatch(loadingActions.complete())
+    }
+  },
+
   async getPostById(id: string) {
     store.dispatch(loadingActions.loading())
     const result = await get(child(ref(db), `posts/${id}`))

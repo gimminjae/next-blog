@@ -1,11 +1,14 @@
 import PostList from "@/components/post/PostList"
 import { postModel } from "@/firebase/database"
+import { useCustomQuery } from "@/hooks/useCustomQuery"
 import { useRouter } from "next/router"
 import React, { useEffect } from "react"
-import { useQuery } from "react-query"
 
 const PostPage = () => {
-  const { error, data: postList } = useQuery(["posts"], postModel.getPostList)
+  const { error, data: postList } = useCustomQuery({
+    key: "posts",
+    queryFn: postModel.getPostList,
+  })
   const router = useRouter()
 
   useEffect(() => {

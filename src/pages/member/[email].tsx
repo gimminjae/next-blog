@@ -1,11 +1,15 @@
+import PostList from "@/components/post/PostList"
 import { useAuth } from "@/firebase/auth"
 import { postModel } from "@/firebase/database"
-import PostList from "@/components/post/PostList"
-import React, { useEffect } from "react"
 import { useCustomQuery } from "@/hooks/useCustomQuery"
+import { useRouter } from "next/router"
+import { useEffect, useMemo } from "react"
 
-const MyPage = () => {
+const MemberPage = () => {
+  const router = useRouter()
   const { user } = useAuth()
+  const email = useMemo(() => router.query.email as string, [router])
+
   const {
     error,
     data: postList,
@@ -13,12 +17,12 @@ const MyPage = () => {
   } = useCustomQuery({
     key: "posts",
     queryFn: () =>
-      user?.uid ? postModel.getPostListByUserId(user?.uid as string) : [],
+      email ? postModel.getPostListByUserEmail(email as string) : [],
   })
-  
+
   useEffect(() => {
-    refetch()
-  }, [user?.uid])
+    if (email) refetch()
+  }, [email])
 
   return (
     <div>
@@ -27,4 +31,4 @@ const MyPage = () => {
     </div>
   )
 }
-export default MyPage
+export default MemberPage

@@ -16,7 +16,7 @@ const Header = () => {
     <header className="sticky top-0 z-30">
       <div className="navbar bg-base-100">
         <div className="navbar-start">
-          <Link href="/post" className="btn btn-ghost text-xl">
+          <Link href="/" className="btn btn-ghost text-xl">
             Dev Diary
           </Link>
         </div>
@@ -37,7 +37,11 @@ const Header = () => {
               <div className="flex flex-nowrap content-center">
                 <ul className="menu menu-horizontal rounded-box">
                   <li>
-                    <Link className="tooltip" data-tip="My Page" href="/member">
+                    <Link
+                      className="tooltip"
+                      data-tip="My Page"
+                      href={`/member/${user?.email}`}
+                    >
                       <FaHouse />
                     </Link>
                   </li>
