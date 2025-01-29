@@ -20,7 +20,7 @@ const Card = ({
   return (
     <>
       <div
-        className="card bg-base-100 shadow-xl xl:w-2/3 cursor-pointer"
+        className="card bg-base-100 shadow-xl xl:w-2/3 cursor-pointer hover:animate-jump animate-duration-1000"
         onClick={onClick}
       >
         <div className="card-body flex flex-cols items-between">
