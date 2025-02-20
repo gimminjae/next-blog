@@ -1,5 +1,5 @@
 import { useAuth } from "@/firebase/auth"
-import { Avatar, Button, Dropdown, Navbar } from "flowbite-react"
+import { Button, Dropdown, Navbar } from "flowbite-react"
 import Link from "next/link"
 import { useRouter } from "next/router"
 import { memo, useCallback } from "react"
@@ -13,15 +13,15 @@ function HeaderNavbar() {
   const { push } = useRouter()
 
   const move = useCallback((path: string) => () => push(path), [])
+
   return (
     <Navbar fluid rounded>
-      <Navbar.Brand href="https://flowbite-react.com">
-        <Link href="/">
-          <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
-            Dev Diary
-          </span>
-        </Link>
-      </Navbar.Brand>
+      <Link
+        href="/"
+        className="self-center whitespace-nowrap text-xl font-semibold dark:text-white"
+      >
+        Dev Diary
+      </Link>
       <div className="flex md:order-2">
         {(user && (
           <Dropdown
@@ -34,7 +34,6 @@ function HeaderNavbar() {
             }
           >
             <Dropdown.Header>
-              {/* <span className="block text-sm">Bonnie Green</span> */}
               <span className="block truncate text-sm font-medium">
                 {user?.email}
               </span>
@@ -66,61 +65,9 @@ function HeaderNavbar() {
           Home
         </Navbar.Link>
         <Navbar.Link href="#">About</Navbar.Link>
+        {user && <Navbar.Link href="/post/write">Write</Navbar.Link>}
       </Navbar.Collapse>
     </Navbar>
   )
 }
 export default memo(HeaderNavbar)
-{
-  /* <div className="navbar bg-base-100">
-        <div className="navbar-start">
-          <Link href="/" className="btn btn-ghost text-xl">
-            Dev Diary
-          </Link>
-        </div>
-        <div className="navbar-end">
-          {!user && (
-            <div>
-              <ul className="menu menu-horizontal px-1">
-                <li>
-                  <button onClick={loginWithGoogle}>
-                    <FaGoogle />
-                  </button>
-                </li>
-              </ul>
-            </div>
-          )}
-          {user && (
-            <>
-              <div className="flex flex-nowrap content-center">
-                <ul className="menu menu-horizontal rounded-box">
-                  <li>
-                    <Link
-                      className="tooltip"
-                      data-tip="My Page"
-                      href={`/member/${user?.email}`}
-                    >
-                      <FaHouse />
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      className="tooltip"
-                      data-tip="Write"
-                      href="/post/write"
-                    >
-                      <FaPenToSquare />
-                    </Link>
-                  </li>
-                  <li>
-                    <p className="tooltip" data-tip="Logout" onClick={logout}>
-                      <FaArrowRightFromBracket />
-                    </p>
-                  </li>
-                </ul>
-              </div>
-            </>
-          )}
-        </div>
-      </div> */
-}
