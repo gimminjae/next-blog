@@ -8,6 +8,10 @@ class MyDocument extends Document {
         <Head>
           <title>Dev Diary</title>
           <link rel="icon" href="/favicon.ico" />
+          <meta
+            name="google-site-verification"
+            content="rW_xYjiXnO63MZm2FNGM2Pg3uRalwX9j_r4rhGjUbN4"
+          />
         </Head>
         <body>
           <Main />
