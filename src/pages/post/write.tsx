@@ -4,9 +4,8 @@ import dynamic from "next/dynamic"
 import { useRouter } from "next/router"
 import { useMemo, ChangeEvent, useCallback, useState, memo } from "react"
 import { FaPenToSquare } from "react-icons/fa6"
-import Button from "../../components/common/Button"
 import { success, warning } from "@/util/toast"
-import { TextInput } from "flowbite-react"
+import { Button, TextInput } from "flowbite-react"
 
 const MdEditor = dynamic(() => import("@/components/post/MdEditor"), {
   ssr: false,
@@ -73,7 +72,12 @@ const WritePostPage = () => {
             />
           </label>
           <div className="flex gap-3">
-            <Button onClick={submitPost}>
+            <Button
+              pill
+              color="gray"
+              className="outline-off"
+              onClick={submitPost}
+            >
               <FaPenToSquare />
             </Button>
           </div>

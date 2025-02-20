@@ -1,6 +1,8 @@
+import { CreatedBy } from "@/components/common"
 import { useAuth } from "@/firebase/auth"
 import { postModel } from "@/firebase/database"
 import { success } from "@/util/toast"
+import { Button } from "flowbite-react"
 import dynamic from "next/dynamic"
 import { useRouter } from "next/router"
 import { useCallback, useEffect, useMemo } from "react"
@@ -28,9 +30,11 @@ const PostDetail = ({ post, error }: any) => {
   const router = useRouter()
   const { user } = useAuth()
   const postId = useMemo(() => router.query.id as string, [router])
+
   useEffect(() => {
     if (!postId) router.push("/post")
   }, [postId])
+
   const handleDelete = useCallback(() => {
     if (!confirm("do you delete this post certainly?")) {
       return
@@ -43,48 +47,62 @@ const PostDetail = ({ post, error }: any) => {
   const pushEditPost = useCallback(() => {
     router.push(`/post/edit/${postId}`)
   }, [router, postId])
+
+  const isSelf = useMemo(
+    () => user?.uid === post.userId,
+    [user?.uid, post.userId]
+  )
+
   return (
     <>
       {error && <p>{error.message}</p>}
       {post && (
-        <div className="mx-auto xl:w-1/2 lg:w-3/5 animate-fade-up">
+        <div className="mx-auto xl:w-1/2 lg:w-3/5">
           <div className="flex flex-col gap-5">
+            <h2 className="text-5xl">{post.title}</h2>
             <div>
-              <div className="flex justify-end">
-                <span className="text-gray-500 whitespace-nowrap">
-                  <strong>By</strong> {post.userEmail || "unknown"}
-                </span>
+              <div className="flex justify-start">
+                <CreatedBy value={post.userEmail} />
               </div>
-              <h1 className="text-6xl">{post.title}</h1>
-            </div>
-            <div className="flex justify-between">
-              <div className="flex gap-5 items-center">
-                <div className="text-sm text-gray-500">
-                  {post.createdAt?.substring(0, 16)}
+              <div className="flex justify-between">
+                <div className="flex gap-5 items-center">
+                  <div className="text-sm text-gray-500">
+                    <span className="flex gap-2 items-center">
+                      <FaPenToSquare className="w-3" />
+                      {post.createdAt?.substring(0, 16)}
+                    </span>
+                  </div>
+                  {user && (
+                    <div className="text-sm text-gray-500">
+                      <span className="flex gap-2 items-center">
+                        <p>최종수정일: </p>
+                        {post.updatedAt?.substring(0, 16)}
+                      </span>
+                    </div>
+                  )}
                 </div>
-                <div className="text-sm text-gray-500">
-                  {post.updatedAt?.substring(0, 16)}
+                <div className="flex gap-3">
+                  {isSelf && (
+                    <>
+                      <Button
+                        pill
+                        color="gray"
+                        className="outline-off"
+                        onClick={pushEditPost}
+                      >
+                        <FaPenToSquare />
+                      </Button>
+                      <Button
+                        pill
+                        color="red"
+                        className="outline-off"
+                        onClick={handleDelete}
+                      >
+                        <FaRegTrashCan />
+                      </Button>
+                    </>
+                  )}
                 </div>
-              </div>
-              <div className="flex">
-                {user?.uid === post.userId && (
-                  <>
-                    <button
-                      className="btn btn-active btn-sm btn-link"
-                      onClick={pushEditPost}
-                    >
-                      <FaPenToSquare />
-                      update
-                    </button>
-                    <button
-                      className="btn btn-active btn-sm btn-link"
-                      onClick={handleDelete}
-                    >
-                      <FaRegTrashCan />
-                      delete
-                    </button>
-                  </>
-                )}
               </div>
             </div>
           </div>

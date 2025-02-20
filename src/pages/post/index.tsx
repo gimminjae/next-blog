@@ -2,6 +2,7 @@ import PostList from "@/components/post/PostList"
 import { postModel } from "@/firebase/database"
 import { useCustomQuery } from "@/hooks/useCustomQuery"
 import { useRouter } from "next/router"
+import { userAgent } from "next/server"
 import React, { useEffect } from "react"
 
 const PostPage = () => {
@@ -9,11 +10,8 @@ const PostPage = () => {
     key: "posts",
     queryFn: postModel.getPostList,
   })
-  const router = useRouter()
 
-  useEffect(() => {
-    router.replace("/member")
-  }, [])
+  const router = useRouter()
 
   return (
     <div>

@@ -1,9 +1,8 @@
-// import { Card } from "flowbite-react"
 import { Card } from "flowbite-react"
 import { useRouter } from "next/router"
-// import Card from "./Card"
 import { memo, useCallback, useMemo } from "react"
 import RemoveMarkdown from "remove-markdown"
+import { CreatedBy } from "../common"
 
 const Post = (props: { post: Post }) => {
   const { post } = props
@@ -29,7 +28,7 @@ const Post = (props: { post: Post }) => {
         </p>
         <div className="flex justify-between text-xs text-gray-500">
           <span>{post.createdAt}</span>
-          <span>By {post?.userEmail}</span>
+          <CreatedBy value={post.userEmail} />
         </div>
       </Card>
     </>
