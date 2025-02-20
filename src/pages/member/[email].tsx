@@ -25,7 +25,7 @@ const MemberPage = () => {
   return (
     <div>
       {/* <div className="w-[50%]"> */}
-      {email && <h1 className="text-3xl">{email} 님의 글</h1>}
+      {email && <h1 className="text-3xl my-5 text-center">{email} 님의 글</h1>}
       {/* </div> */}
       <PostList error={error} postList={postList} />
     </div>
