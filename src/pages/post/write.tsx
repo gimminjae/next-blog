@@ -2,10 +2,10 @@ import { useAuth } from "@/firebase/auth"
 import { postModel } from "@/firebase/database"
 import dynamic from "next/dynamic"
 import { useRouter } from "next/router"
-import React, { ChangeEvent, useCallback, useState } from "react"
+import { useMemo, ChangeEvent, useCallback, useState, memo } from "react"
 import { FaPenToSquare } from "react-icons/fa6"
-import Button from "../../components/common/Button"
 import { success, warning } from "@/util/toast"
+import { Button, TextInput } from "flowbite-react"
 
 const MdEditor = dynamic(() => import("@/components/post/MdEditor"), {
   ssr: false,
@@ -21,10 +21,12 @@ const WritePostPage = () => {
     title: "",
     content: "",
   })
+
   const handleChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     const { id, name, value } = e.target
     setPost((prev) => ({ ...prev, [id || name]: value }))
   }, [])
+
   const setContent = useCallback((value: string) => {
     handleChange({
       target: { id: "content", name: "content", value },
@@ -47,14 +49,20 @@ const WritePostPage = () => {
     })
     success("글이 작성되었습니다.\nPost is written.")
     router.push("/post")
-  }, [post])
+  }, [post, user])
+
+  const editorIsValid = useMemo(
+    () => typeof window !== "undefined" && MdEditor,
+    []
+  )
+
   return (
     <>
       <div className="flex flex-col gap-5 my-5">
         <div className="flex justify-between">
           <label className="input input-bordered flex items-center gap-2 w-1/2">
             Title
-            <input
+            <TextInput
               className="grow"
               type="text"
               id="title"
@@ -64,13 +72,18 @@ const WritePostPage = () => {
             />
           </label>
           <div className="flex gap-3">
-            <Button onClick={submitPost}>
+            <Button
+              pill
+              color="gray"
+              className="outline-off"
+              onClick={submitPost}
+            >
               <FaPenToSquare />
             </Button>
           </div>
         </div>
         <div>
-          {typeof window !== "undefined" && MdEditor && (
+          {editorIsValid && (
             <MdEditor value={post.content} onChange={setContent} />
           )}
         </div>
@@ -79,4 +92,4 @@ const WritePostPage = () => {
   )
 }
 
-export default WritePostPage
+export default memo(WritePostPage)

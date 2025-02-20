@@ -1,6 +1,6 @@
 import { store } from "@/firebase/storage"
 import MDEditor from "@uiw/react-md-editor"
-import { SetStateAction } from "react"
+import { memo, SetStateAction } from "react"
 
 const MdEditor = ({ value, onChange }: any) => {
   const insertToTextArea = (intsertString: string) => {
@@ -73,4 +73,4 @@ const MdEditor = ({ value, onChange }: any) => {
     </div>
   )
 }
-export default MdEditor
+export default memo(MdEditor)

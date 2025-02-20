@@ -1,6 +1,7 @@
 import { useAuth } from "@/firebase/auth"
 import { postModel } from "@/firebase/database"
 import { error, info, success, warning } from "@/util/toast"
+import { Button, TextInput } from "flowbite-react"
 import dynamic from "next/dynamic"
 import { useRouter } from "next/router"
 import React, { ChangeEvent, useCallback, useEffect, useState } from "react"
@@ -77,28 +78,39 @@ const EditPostPage = () => {
 
     return () => clearInterval(interval) // 컴포넌트가 언마운트될 때 인터벌 정리
   }, [post.content])
+
   return (
     <>
       <div className="flex flex-col gap-5 my-5">
         <div className="flex justify-between">
           <label className="input input-bordered flex items-center gap-2  w-1/2">
             Title
-            <input
+            <TextInput
               className="grow"
               type="text"
               id="title"
-              placeholder="type the title..."
               value={post.title}
+              placeholder="type the title..."
               onChange={handleChange}
             />
           </label>
           <div className="flex gap-3">
-            <button className="btn" onClick={resetPost}>
+            <Button
+              pill
+              color="gray"
+              className="outline-off"
+              onClick={resetPost}
+            >
               <FaArrowRotateLeft />
-            </button>
-            <button className="btn" onClick={savePost}>
+            </Button>
+            <Button
+              pill
+              color="gray"
+              className="outline-off"
+              onClick={savePost}
+            >
               <FaPenToSquare />
-            </button>
+            </Button>
           </div>
         </div>
         <div>

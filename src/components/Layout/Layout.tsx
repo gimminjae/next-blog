@@ -4,21 +4,19 @@ import { useRouter } from "next/router"
 
 function Layout({ children }: React.PropsWithChildren<{}>) {
   const router = useRouter()
-  useEffect(() => {
-    console.log(router)
-  }, [router.pathname])
+
   const isPostWritePage = useMemo(
     () => router.pathname.includes("write") || router.pathname.includes("edit"),
     [router.pathname]
   )
+
   return (
     <>
       <Header />
       <div
         className={`animate-fade-up ${
-          isPostWritePage
-            ? ""
-            : "md:container md:mx-auto xl:container xl:mx-auto sm:container sm:mx-auto"
+          isPostWritePage &&
+          "md:container md:mx-auto xl:container xl:mx-auto sm:container sm:mx-auto"
         }`}
       >
         {children}
