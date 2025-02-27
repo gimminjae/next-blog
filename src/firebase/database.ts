@@ -27,6 +27,37 @@ export const postModel = {
       createdAtTimeStamp: nowStamp,
     })
   },
+  async getPostListByPage(page: number, size: number, userId?: string) {
+    store.dispatch(loadingActions.loading())
+    try {
+      let snapshot
+      if (userId) {
+        snapshot = await get(
+          query(ref(db, "posts"), orderByChild("userId"), equalTo(userId))
+        )
+      } else {
+        snapshot = await get(ref(db, "posts"))
+      }
+
+      const result = snapshot?.val()
+      if (!result) return []
+
+      const allPosts = Object.values(result)
+      // Sort by createdAtTimeStamp in descending order
+      const sortedPosts = allPosts.sort((a: any, b: any) => 
+        b.createdAtTimeStamp - a.createdAtTimeStamp
+      )
+
+      const startIndex = (page - 1) * size
+      const endIndex = startIndex + size
+      return sortedPosts.slice(startIndex, endIndex)
+    } catch (error) {
+      console.log(error)
+      return []
+    } finally {
+      store.dispatch(loadingActions.complete())
+    }
+  },
 
   async getPostListByUserEmail(email: string) {
     store.dispatch(loadingActions.loading())
