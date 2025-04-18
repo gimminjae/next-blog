@@ -44,8 +44,8 @@ export const postModel = {
 
       const allPosts = Object.values(result)
       // Sort by createdAtTimeStamp in descending order
-      const sortedPosts = allPosts.sort((a: any, b: any) => 
-        b.createdAtTimeStamp - a.createdAtTimeStamp
+      const sortedPosts = allPosts.sort(
+        (a: any, b: any) => b.createdAtTimeStamp - a.createdAtTimeStamp
       )
 
       const startIndex = (page - 1) * size
@@ -66,7 +66,9 @@ export const postModel = {
         query(ref(db, "posts"), orderByChild("userEmail"), equalTo(email))
       )
       const result = snapshot?.val()
-      return result ? Object.values(result) : []
+      return (result ? Object.values(result) : []).sort((a: any, b: any) =>
+        a.createdAt > b.createdAt ? -1 : 1
+      )
     } catch (error) {
       console.log(error)
       return []
