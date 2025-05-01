@@ -1,6 +1,6 @@
 import "../app/globals.css"
 import { AppProps } from "next/app"
-import { AuthProvider } from "@/firebase/auth"
+import { AuthProvider } from "@/hooks/useAuth"
 import Layout from "@/components/Layout/Layout"
 import React, { useEffect, useState } from "react"
 import { QueryClient, QueryClientProvider } from "react-query"

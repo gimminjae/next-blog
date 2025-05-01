@@ -1,4 +1,4 @@
-import { useAuth } from "@/firebase/auth"
+import { useAuth } from "@/hooks/useAuth"
 import { postModel } from "@/firebase/database"
 import PostList from "@/components/post/PostList"
 import { useCustomQuery } from "@/hooks/useCustomQuery"
@@ -6,9 +6,8 @@ import { useCustomQuery } from "@/hooks/useCustomQuery"
 const UsersPostList = () => {
   const { user } = useAuth()
   const { error, data: postList } = useCustomQuery({
-    key: "posts", 
-    queryFn: () =>
-      postModel.getPostListByUserId(user?.uid as string)
+    key: "posts",
+    queryFn: () => postModel.getPostListByUserId(user?.uid as string),
   })
   return (
     <>

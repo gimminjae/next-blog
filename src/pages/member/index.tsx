@@ -1,4 +1,4 @@
-import { useAuth } from "@/firebase/auth"
+import { useAuth } from "@/hooks/useAuth"
 import { postModel } from "@/firebase/database"
 import PostList from "@/components/post/PostList"
 import React, { useEffect } from "react"
@@ -15,7 +15,7 @@ const MyPage = () => {
     queryFn: () =>
       user?.uid ? postModel.getPostListByUserId(user?.uid as string) : [],
   })
-  
+
   useEffect(() => {
     refetch()
   }, [user?.uid])

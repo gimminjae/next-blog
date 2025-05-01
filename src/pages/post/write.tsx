@@ -1,4 +1,4 @@
-import { useAuth } from "@/firebase/auth"
+import { useAuth } from "@/hooks/useAuth"
 import { postModel } from "@/firebase/database"
 import dynamic from "next/dynamic"
 import { useRouter } from "next/router"

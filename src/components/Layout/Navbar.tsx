@@ -1,4 +1,4 @@
-import { useAuth } from "@/firebase/auth"
+import { useAuth } from "@/hooks/useAuth"
 import { Button, Dropdown, Navbar } from "flowbite-react"
 import Link from "next/link"
 import { useRouter } from "next/router"

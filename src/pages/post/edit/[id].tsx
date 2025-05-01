@@ -1,4 +1,4 @@
-import { useAuth } from "@/firebase/auth"
+import { useAuth } from "@/hooks/useAuth"
 import { postModel } from "@/firebase/database"
 import { error, info, success, warning } from "@/util/toast"
 import { Button, TextInput } from "flowbite-react"
