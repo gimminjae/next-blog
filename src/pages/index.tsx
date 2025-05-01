@@ -1,21 +1,21 @@
-import React, { useEffect } from "react"
-import { useRouter } from "next/router"
-import { useCustomQuery } from "@/hooks/useCustomQuery"
-import { postModel } from "@/firebase/database"
+import React from "react"
 import PostList from "@/components/post/PostList"
+import Head from "next/head"
+import usePost from "@/hooks/usePost"
 
 function Home() {
-  const { error, data: postList } = useCustomQuery({
-    key: "posts",
-    queryFn: postModel.getPostList,
-  })
-
-  const router = useRouter()
+  const { postList } = usePost()
 
   return (
-    <div>
-      <PostList error={error} postList={postList} />
-    </div>
+    <>
+      <Head>
+        <title>The Note: Home</title>
+        <meta name="description" content="The Note: Home" />
+      </Head>
+      <div>
+        <PostList error={postList?.error} postList={postList?.data} />
+      </div>
+    </>
   )
 }
 export default Home

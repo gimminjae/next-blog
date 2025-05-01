@@ -1,6 +1,7 @@
 import PostList from "@/components/post/PostList"
 import useCRouter from "@/hooks/useCRouter"
 import usePost from "@/hooks/usePost"
+import Head from "next/head"
 import { useMemo } from "react"
 
 const MemberPage = () => {
@@ -10,17 +11,23 @@ const MemberPage = () => {
   const { postListByUserEmail } = usePost({ param: { userEmail: email } })
 
   return (
-    <div>
-      {email && (
-        <h1 className="text-3xl my-5 text-center">
-          <strong>{email}</strong> 님의 글
-        </h1>
-      )}
-      <PostList
-        error={postListByUserEmail?.error}
-        postList={postListByUserEmail?.data}
-      />
-    </div>
+    <>
+      <Head>
+        <title>{`About ${email}`}</title>
+        <meta name="description" content={`About ${email}`} />
+      </Head>
+      <div>
+        {email && (
+          <h1 className="text-3xl my-5 text-center">
+            <strong>{email}</strong> 님의 글
+          </h1>
+        )}
+        <PostList
+          error={postListByUserEmail?.error}
+          postList={postListByUserEmail?.data}
+        />
+      </div>
+    </>
   )
 }
 export default MemberPage

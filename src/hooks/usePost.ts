@@ -14,7 +14,7 @@ type Props = {
 const usePost = ({ param }: Props = { param: undefined }) => {
   const postList = useCustomQuery<Post[], Error>({
     key: "posts",
-    queryFn: () => (param ? postModel.getPostList() : []),
+    queryFn: () => (!param ? postModel.getPostList() : []),
   })
 
   const postListByUserId = useCustomQuery<Post[], Error>({
