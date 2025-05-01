@@ -19,13 +19,16 @@ export const postModel = {
     const now = new Date()
     const nowStr = util.getFormattedDateTime(now)
     const nowStamp = util.getDateTimeStamp(now)
-    set(ref(db, `posts/${id}`), {
+    const savedPost = {
       ...post,
       id: id,
       createdAt: nowStr,
       updatedAt: nowStr,
       createdAtTimeStamp: nowStamp,
-    })
+    }
+    set(ref(db, `posts/${id}`), savedPost)
+
+    return savedPost
   },
   async getPostListByPage(page: number, size: number, userId?: string) {
     store.dispatch(loadingActions.loading())

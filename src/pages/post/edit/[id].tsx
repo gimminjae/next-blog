@@ -1,11 +1,11 @@
 import { useAuth } from "@/hooks/useAuth"
-import { postModel } from "@/firebase/database"
 import { error, info, success, warning } from "@/util/toast"
 import { Button, TextInput } from "flowbite-react"
 import dynamic from "next/dynamic"
-import { useRouter } from "next/router"
 import React, { ChangeEvent, useCallback, useEffect, useState } from "react"
 import { FaPenToSquare, FaArrowRotateLeft } from "react-icons/fa6"
+import useCRouter from "@/hooks/useCRouter"
+import usePost from "@/hooks/usePost"
 
 const MdEditor = dynamic(() => import("@/components/post/MdEditor"), {
   ssr: false,
@@ -13,15 +13,16 @@ const MdEditor = dynamic(() => import("@/components/post/MdEditor"), {
 
 const EditPostPage = () => {
   const { user } = useAuth()
-  const router = useRouter()
+  const router = useCRouter()
   const [post, setPost] = useState<Post>({
     userId: "",
     userEmail: "",
     title: "",
     content: "",
   })
-
-  const [firstContent, setFirstContent] = useState<string>("")
+  const { postDetail, updatePost } = usePost({
+    param: { postId: router.query.id as string },
+  })
 
   const handleChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     const { id, name, value } = e.target
@@ -43,30 +44,23 @@ const EditPostPage = () => {
       warning("제목 혹은 내용이 없습니다.\nTitle, content is empty.")
       return
     }
-    postModel.updatePost({ ...post, userId: user?.uid as string })
+    updatePost({ ...post, userId: user?.uid as string })
   }, [post])
 
   const savePost = useCallback(async () => {
     await submitPost()
     success("글이 수정되었습니다.\nPost is modified.")
-    router.push(`/post/${post.id}`)
+    router.push({ path: `/post/${post.id}` })
   }, [post])
 
   const resetPost = useCallback(() => {
-    setContent(firstContent)
+    setContent(postDetail?.data?.content || "")
     info("초기화되었습니다.\nInitialized successfully")
-  }, [firstContent])
-
-  const getPost = useCallback(async () => {
-    const postId = router.query.id
-    const apiPost = await postModel.getPostById(postId as string)
-    setPost(apiPost)
-    setFirstContent(apiPost.content)
-  }, [router])
+  }, [postDetail?.data?.content])
 
   useEffect(() => {
-    getPost()
-  }, [])
+    if (postDetail?.data) setPost(postDetail?.data as any)
+  }, [postDetail?.data])
 
   useEffect(() => {
     const interval = setInterval(async () => {
