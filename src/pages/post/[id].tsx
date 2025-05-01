@@ -1,12 +1,14 @@
 import { CreatedBy } from "@/components/common"
-import { useAuth } from "@/firebase/auth"
+import { useAuth } from "@/hooks/useAuth"
 import { postModel } from "@/firebase/database"
 import { success } from "@/util/toast"
 import { Button } from "flowbite-react"
 import dynamic from "next/dynamic"
-import { useRouter } from "next/router"
 import { useCallback, useEffect, useMemo } from "react"
 import { FaPenToSquare, FaRegTrashCan } from "react-icons/fa6"
+import useCRouter from "@/hooks/useCRouter"
+import usePost from "@/hooks/usePost"
+import Head from "next/head"
 
 const MdViewer = dynamic(() => import("@/components/post/MdViewer"), {
   ssr: false,
@@ -27,26 +29,27 @@ export async function getServerSideProps(context: any) {
 }
 
 const PostDetail = ({ post, error }: any) => {
-  const router = useRouter()
+  const { push, query } = useCRouter()
+  const { deleteById } = usePost()
   const { user } = useAuth()
-  const postId = useMemo(() => router.query.id as string, [router])
+  const postId = useMemo(() => query.id as string, [query])
 
   useEffect(() => {
-    if (!postId) router.push("/post")
+    if (!postId) push({ path: "/post" })
   }, [postId])
 
   const handleDelete = useCallback(() => {
     if (!confirm("do you delete this post certainly?")) {
       return
     }
-    const result = postModel.deletePostById(postId)
+    if (postId) deleteById(postId)
     success("삭제되었습니다.\nPost is deleted.")
-    router.push("/post")
+    push({ path: "/post" })
   }, [user, postId, post])
 
   const pushEditPost = useCallback(() => {
-    router.push(`/post/edit/${postId}`)
-  }, [router, postId])
+    push({ path: `/post/edit/${postId}` })
+  }, [postId])
 
   const isSelf = useMemo(
     () => user?.uid === post.userId,
@@ -55,6 +58,10 @@ const PostDetail = ({ post, error }: any) => {
 
   return (
     <>
+      <Head>
+        <title>{post.title}</title>
+        <meta name="description" content={post.title} />
+      </Head>
       {error && <p>{error.message}</p>}
       {post && (
         <div className="mx-auto xl:w-1/2 lg:w-3/5">

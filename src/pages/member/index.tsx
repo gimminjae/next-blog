@@ -1,29 +1,20 @@
-import { useAuth } from "@/firebase/auth"
-import { postModel } from "@/firebase/database"
+import { useAuth } from "@/hooks/useAuth"
 import PostList from "@/components/post/PostList"
-import React, { useEffect } from "react"
-import { useCustomQuery } from "@/hooks/useCustomQuery"
+import React from "react"
+import usePost from "@/hooks/usePost"
 
 const MyPage = () => {
   const { user } = useAuth()
-  const {
-    error,
-    data: postList,
-    refetch,
-  } = useCustomQuery({
-    key: "posts",
-    queryFn: () =>
-      user?.uid ? postModel.getPostListByUserId(user?.uid as string) : [],
-  })
-  
-  useEffect(() => {
-    refetch()
-  }, [user?.uid])
+
+  const { postListByUserId } = usePost({ param: { userId: user?.uid } })
 
   return (
     <div>
       <h1 className="font-5xl">My Page</h1>
-      <PostList error={error} postList={postList} />
+      <PostList
+        error={postListByUserId?.error}
+        postList={postListByUserId?.data}
+      />
     </div>
   )
 }

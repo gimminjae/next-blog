@@ -1,7 +1,7 @@
-import { useAuth } from "@/firebase/auth"
+import { useAuth } from "@/hooks/useAuth"
+import useCRouter from "@/hooks/useCRouter"
 import { Button, Dropdown, Navbar } from "flowbite-react"
 import Link from "next/link"
-import { useRouter } from "next/router"
 import { memo, useCallback } from "react"
 import { FaArrowRightFromBracket, FaGoogle } from "react-icons/fa6"
 import { IoMdSettings } from "react-icons/io"
@@ -10,9 +10,10 @@ import { RxAvatar } from "react-icons/rx"
 
 function HeaderNavbar() {
   const { user, logout, loginWithGoogle } = useAuth()
-  const { push } = useRouter()
 
-  const move = useCallback((path: string) => () => push(path), [])
+  const { push } = useCRouter()
+
+  const move = useCallback((path: string) => () => push({ path }), [])
 
   return (
     <Navbar fluid rounded>
@@ -20,7 +21,7 @@ function HeaderNavbar() {
         href="/"
         className="self-center whitespace-nowrap text-xl font-semibold dark:text-white"
       >
-        Dev Diary
+        The Note
       </Link>
       <div className="flex md:order-2">
         {(user && (

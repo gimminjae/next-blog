@@ -1,11 +1,11 @@
-import { useAuth } from "@/firebase/auth"
-import { postModel } from "@/firebase/database"
+import { useAuth } from "@/hooks/useAuth"
 import dynamic from "next/dynamic"
-import { useRouter } from "next/router"
 import { useMemo, ChangeEvent, useCallback, useState, memo } from "react"
 import { FaPenToSquare } from "react-icons/fa6"
 import { success, warning } from "@/util/toast"
 import { Button, TextInput } from "flowbite-react"
+import useCRouter from "@/hooks/useCRouter"
+import usePost from "@/hooks/usePost"
 
 const MdEditor = dynamic(() => import("@/components/post/MdEditor"), {
   ssr: false,
@@ -13,7 +13,7 @@ const MdEditor = dynamic(() => import("@/components/post/MdEditor"), {
 
 const WritePostPage = () => {
   const { user } = useAuth()
-  const router = useRouter()
+  const router = useCRouter()
 
   const [post, setPost] = useState<Post>({
     userId: "",
@@ -21,6 +21,8 @@ const WritePostPage = () => {
     title: "",
     content: "",
   })
+
+  const { writePost } = usePost()
 
   const handleChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     const { id, name, value } = e.target
@@ -33,7 +35,7 @@ const WritePostPage = () => {
     } as ChangeEvent<HTMLInputElement>)
   }, [])
 
-  const submitPost = useCallback(() => {
+  const submitPost = useCallback(async () => {
     if (!user) {
       alert("로그인 필요")
       return
@@ -42,13 +44,13 @@ const WritePostPage = () => {
       warning("제목 혹은 내용이 없습니다.\nTitle, content is empty.")
       return
     }
-    postModel.writePost({
+    const savedPost = await writePost({
       ...post,
       userId: user?.uid!!,
       userEmail: user?.email!!,
     })
     success("글이 작성되었습니다.\nPost is written.")
-    router.push("/post")
+    router.push({ path: savedPost?.id ? `/post/${savedPost?.id}` : '/' })
   }, [post, user])
 
   const editorIsValid = useMemo(

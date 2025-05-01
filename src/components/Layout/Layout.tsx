@@ -1,9 +1,9 @@
-import React, { ReactNode, useEffect, useMemo } from "react"
+import React, { useMemo } from "react"
 import Header from "./Header"
-import { useRouter } from "next/router"
+import useCRouter from "@/hooks/useCRouter"
 
 function Layout({ children }: React.PropsWithChildren<{}>) {
-  const router = useRouter()
+  const router = useCRouter()
 
   const isPostWritePage = useMemo(
     () => router.pathname.includes("write") || router.pathname.includes("edit"),
