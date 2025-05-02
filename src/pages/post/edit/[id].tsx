@@ -76,7 +76,7 @@ const EditPostPage = () => {
 
   return (
     <>
-      <MetaHead title={`Edit: ${post.title}`} />
+      <MetaHead title={`Edit: ${postDetail?.data?.title}`} />
       <div className="flex flex-col gap-5 my-5">
         <div className="flex justify-between">
           <label className="input input-bordered flex items-center gap-2  w-1/2">
