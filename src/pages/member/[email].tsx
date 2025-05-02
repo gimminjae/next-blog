@@ -2,13 +2,17 @@ import PostList from "@/components/post/PostList"
 import useCRouter from "@/hooks/useCRouter"
 import usePost from "@/hooks/usePost"
 import Head from "next/head"
-import { useMemo } from "react"
+import { useEffect, useMemo } from "react"
 
 const MemberPage = () => {
   const router = useCRouter()
-  const email = useMemo(() => router.query.email as string, [router])
+  const email = useMemo(() => (router.query.email as string) || "", [router.query])
 
   const { postListByUserEmail } = usePost({ param: { userEmail: email } })
+
+  useEffect(() => {
+    console.log('postListByUserEmail?.data: ', postListByUserEmail?.data)
+  }, [postListByUserEmail?.data])
 
   return (
     <>
