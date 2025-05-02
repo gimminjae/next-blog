@@ -6,6 +6,7 @@ import { success, warning } from "@/util/toast"
 import { Button, TextInput } from "flowbite-react"
 import useCRouter from "@/hooks/useCRouter"
 import usePost from "@/hooks/usePost"
+import MetaHead from "@/components/common/Head"
 
 const MdEditor = dynamic(() => import("@/components/post/MdEditor"), {
   ssr: false,
@@ -60,6 +61,7 @@ const WritePostPage = () => {
 
   return (
     <>
+      <MetaHead title="Write New Post" content="Write new Post" />
       <div className="flex flex-col gap-5 my-5">
         <div className="flex justify-between">
           <label className="input input-bordered flex items-center gap-2 w-1/2">

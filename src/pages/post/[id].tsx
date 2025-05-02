@@ -8,7 +8,7 @@ import { useCallback, useEffect, useMemo } from "react"
 import { FaPenToSquare, FaRegTrashCan } from "react-icons/fa6"
 import useCRouter from "@/hooks/useCRouter"
 import usePost from "@/hooks/usePost"
-import Head from "next/head"
+import MetaHead from "@/components/common/Head"
 
 const MdViewer = dynamic(() => import("@/components/post/MdViewer"), {
   ssr: false,
@@ -58,10 +58,7 @@ const PostDetail = ({ post, error }: any) => {
 
   return (
     <>
-      <Head>
-        <title>{post.title}</title>
-        <meta name="description" content={post.title} />
-      </Head>
+      <MetaHead title={post.title} content={post.title} />
       {error && <p>{error.message}</p>}
       {post && (
         <div className="mx-auto xl:w-1/2 lg:w-3/5">

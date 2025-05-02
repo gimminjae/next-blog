@@ -1,8 +1,8 @@
+import MetaHead from "@/components/common/Head"
 import PostList from "@/components/post/PostList"
 import useCRouter from "@/hooks/useCRouter"
 import usePost from "@/hooks/usePost"
-import Head from "next/head"
-import { useEffect, useMemo } from "react"
+import { useMemo } from "react"
 
 const MemberPage = () => {
   const router = useCRouter()
@@ -12,10 +12,7 @@ const MemberPage = () => {
 
   return (
     <>
-      <Head>
-        <title>{`About ${email}`}</title>
-        <meta name="description" content={`About ${email}`} />
-      </Head>
+      <MetaHead title={`About ${email}`} content={`About ${email}`} />
       <div>
         {email && (
           <h1 className="text-3xl my-5 text-center">

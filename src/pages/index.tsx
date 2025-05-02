@@ -1,17 +1,14 @@
 import React from "react"
 import PostList from "@/components/post/PostList"
-import Head from "next/head"
 import usePost from "@/hooks/usePost"
+import MetaHead from "@/components/common/Head"
 
 function Home() {
   const { postList } = usePost()
 
   return (
     <>
-      <Head>
-        <title>The Note: Home</title>
-        <meta name="description" content="The Note: Home" />
-      </Head>
+      <MetaHead title="The Note: Home" content="The Note: Home" />
       <div>
         <PostList error={postList?.error} postList={postList?.data} />
       </div>
