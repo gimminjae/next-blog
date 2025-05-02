@@ -10,10 +10,6 @@ const MemberPage = () => {
 
   const { postListByUserEmail } = usePost({ param: { userEmail: email } })
 
-  useEffect(() => {
-    console.log('postListByUserEmail?.data: ', postListByUserEmail?.data)
-  }, [postListByUserEmail?.data])
-
   return (
     <>
       <Head>
