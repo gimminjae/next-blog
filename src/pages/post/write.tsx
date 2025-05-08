@@ -1,12 +1,12 @@
 import { useAuth } from "@/hooks/useAuth"
 import dynamic from "next/dynamic"
 import { useMemo, ChangeEvent, useCallback, useState, memo } from "react"
-import { FaPenToSquare } from "react-icons/fa6"
 import { success, warning } from "@/util/toast"
 import { Button, TextInput } from "flowbite-react"
 import useCRouter from "@/hooks/useCRouter"
 import usePost from "@/hooks/usePost"
 import MetaHead from "@/components/common/Head"
+import { WriteIcon } from "@/components/icon/Icons"
 
 const MdEditor = dynamic(() => import("@/components/post/MdEditor"), {
   ssr: false,
@@ -82,7 +82,7 @@ const WritePostPage = () => {
               className="outline-off"
               onClick={submitPost}
             >
-              <FaPenToSquare />
+              <WriteIcon />
             </Button>
           </div>
         </div>

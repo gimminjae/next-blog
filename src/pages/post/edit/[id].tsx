@@ -3,10 +3,10 @@ import { error, info, success, warning } from "@/util/toast"
 import { Button, TextInput } from "flowbite-react"
 import dynamic from "next/dynamic"
 import React, { ChangeEvent, useCallback, useEffect, useState } from "react"
-import { FaPenToSquare, FaArrowRotateLeft } from "react-icons/fa6"
 import useCRouter from "@/hooks/useCRouter"
 import usePost from "@/hooks/usePost"
 import MetaHead from "@/components/common/Head"
+import { RollbackIcon, WriteIcon } from "@/components/icon/Icons"
 
 const MdEditor = dynamic(() => import("@/components/post/MdEditor"), {
   ssr: false,
@@ -97,7 +97,7 @@ const EditPostPage = () => {
               className="outline-off"
               onClick={resetPost}
             >
-              <FaArrowRotateLeft />
+              <RollbackIcon />
             </Button>
             <Button
               pill
@@ -105,7 +105,7 @@ const EditPostPage = () => {
               className="outline-off"
               onClick={savePost}
             >
-              <FaPenToSquare />
+              <WriteIcon />
             </Button>
           </div>
         </div>
