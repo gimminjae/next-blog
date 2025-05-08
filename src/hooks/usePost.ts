@@ -13,18 +13,18 @@ type Props = {
 
 const usePost = ({ param }: Props = { param: undefined }) => {
   const postList = useCustomQuery<Post[], Error>({
-    key: "posts",
+    key: "postList",
     queryFn: () => (!param ? postModel.getPostList() : []),
   })
 
   const postListByUserId = useCustomQuery<Post[], Error>({
-    key: "postsByUserId",
+    key: param?.userId || "",
     queryFn: () =>
       param?.userId ? postModel.getPostListByUserId(param?.userId) : [],
   })
 
   const postListByUserEmail = useCustomQuery<Post[], Error>({
-    key: "posts",
+    key: param?.userEmail || "",
     queryFn: () =>
       param?.userEmail
         ? postModel.getPostListByUserEmail(param?.userEmail)
@@ -32,7 +32,7 @@ const usePost = ({ param }: Props = { param: undefined }) => {
   })
 
   const postDetail = useCustomQuery<Post, Error>({
-    key: "post",
+    key: param?.postId || "",
     queryFn: () => (param?.postId ? postModel.getPostById(param?.postId) : []),
   })
 

@@ -5,10 +5,10 @@ import { success } from "@/util/toast"
 import { Button } from "flowbite-react"
 import dynamic from "next/dynamic"
 import { useCallback, useEffect, useMemo } from "react"
-import { FaPenToSquare, FaRegTrashCan } from "react-icons/fa6"
 import useCRouter from "@/hooks/useCRouter"
 import usePost from "@/hooks/usePost"
-import Head from "next/head"
+import MetaHead from "@/components/common/Head"
+import { DeleteIcon, WriteIcon } from "@/components/icon/Icons"
 
 const MdViewer = dynamic(() => import("@/components/post/MdViewer"), {
   ssr: false,
@@ -58,10 +58,7 @@ const PostDetail = ({ post, error }: any) => {
 
   return (
     <>
-      <Head>
-        <title>{post.title}</title>
-        <meta name="description" content={post.title} />
-      </Head>
+      <MetaHead title={post.title} content={post.title} />
       {error && <p>{error.message}</p>}
       {post && (
         <div className="mx-auto xl:w-1/2 lg:w-3/5">
@@ -75,7 +72,7 @@ const PostDetail = ({ post, error }: any) => {
                 <div className="flex gap-5 items-center">
                   <div className="text-sm text-gray-500">
                     <span className="flex gap-2 items-center">
-                      <FaPenToSquare className="w-3" />
+                      <WriteIcon className="w-3" />
                       {post.createdAt?.substring(0, 16)}
                     </span>
                   </div>
@@ -97,7 +94,7 @@ const PostDetail = ({ post, error }: any) => {
                         className="outline-off"
                         onClick={pushEditPost}
                       >
-                        <FaPenToSquare />
+                        <WriteIcon />
                       </Button>
                       <Button
                         pill
@@ -105,7 +102,7 @@ const PostDetail = ({ post, error }: any) => {
                         className="outline-off"
                         onClick={handleDelete}
                       >
-                        <FaRegTrashCan />
+                        <DeleteIcon />
                       </Button>
                     </>
                   )}
