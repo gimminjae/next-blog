@@ -6,7 +6,7 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
-          <title>The Note</title>
+          {/* <title>The Note</title> */}
           <link rel="icon" href="/favicon.ico" />
           <meta
             name="google-site-verification"

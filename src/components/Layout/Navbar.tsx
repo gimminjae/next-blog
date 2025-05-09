@@ -3,7 +3,7 @@ import useCRouter from "@/hooks/useCRouter"
 import { Dropdown, Navbar } from "flowbite-react"
 import Link from "next/link"
 import { memo, useCallback } from "react"
-import FormButton from "../form/FormButton"
+import FormButton from "@/components/form/FormButton"
 import { AvatarIcon, DashboardIcon, GoogleIcon, LogoutIcon, SettingIcon } from "@/components/icon/Icons"
 
 function HeaderNavbar() {
