@@ -1,12 +1,13 @@
 import { useAuth } from "@/hooks/useAuth"
 import { error, info, success, warning } from "@/util/toast"
-import { Button, TextInput } from "flowbite-react"
 import dynamic from "next/dynamic"
 import React, { ChangeEvent, useCallback, useEffect, useState } from "react"
 import useCRouter from "@/hooks/useCRouter"
 import usePost from "@/hooks/usePost"
 import MetaHead from "@/components/common/Head"
 import { RollbackIcon, WriteIcon } from "@/components/icon/Icons"
+import FormTextInput from "@/components/form/FormTextInput"
+import FormButton from "@/components/form/FormButton"
 
 const MdEditor = dynamic(() => import("@/components/post/MdEditor"), {
   ssr: false,
@@ -81,7 +82,7 @@ const EditPostPage = () => {
         <div className="flex justify-between">
           <label className="input input-bordered flex items-center gap-2  w-1/2">
             Title
-            <TextInput
+            <FormTextInput
               className="grow"
               type="text"
               id="title"
@@ -91,22 +92,22 @@ const EditPostPage = () => {
             />
           </label>
           <div className="flex gap-3">
-            <Button
+            <FormButton
               pill
               color="gray"
               className="outline-off"
               onClick={resetPost}
             >
               <RollbackIcon />
-            </Button>
-            <Button
+            </FormButton>
+            <FormButton
               pill
               color="gray"
               className="outline-off"
               onClick={savePost}
             >
               <WriteIcon />
-            </Button>
+            </FormButton>
           </div>
         </div>
         <div>

@@ -2,7 +2,7 @@ import { Card } from "flowbite-react"
 import { useRouter } from "next/router"
 import { memo, useCallback, useMemo } from "react"
 import RemoveMarkdown from "remove-markdown"
-import { CreatedBy } from "../common"
+import CreatedBy from "../common/CreatedBy"
 
 const Post = (props: { post: Post }) => {
   const { post } = props

@@ -1,14 +1,15 @@
-import { CreatedBy } from "@/components/common"
+
 import { useAuth } from "@/hooks/useAuth"
 import { postModel } from "@/firebase/database"
 import { success } from "@/util/toast"
-import { Button } from "flowbite-react"
 import dynamic from "next/dynamic"
 import { useCallback, useEffect, useMemo } from "react"
 import useCRouter from "@/hooks/useCRouter"
 import usePost from "@/hooks/usePost"
 import MetaHead from "@/components/common/Head"
 import { DeleteIcon, WriteIcon } from "@/components/icon/Icons"
+import CreatedBy from "@/components/common/CreatedBy"
+import FormButton from "@/components/form/FormButton"
 
 const MdViewer = dynamic(() => import("@/components/post/MdViewer"), {
   ssr: false,
@@ -88,22 +89,22 @@ const PostDetail = ({ post, error }: any) => {
                 <div className="flex gap-3">
                   {isSelf && (
                     <>
-                      <Button
+                      <FormButton
                         pill
                         color="gray"
                         className="outline-off"
                         onClick={pushEditPost}
                       >
                         <WriteIcon />
-                      </Button>
-                      <Button
+                      </FormButton>
+                      <FormButton
                         pill
                         color="red"
                         className="outline-off"
                         onClick={handleDelete}
                       >
                         <DeleteIcon />
-                      </Button>
+                      </FormButton>
                     </>
                   )}
                 </div>
