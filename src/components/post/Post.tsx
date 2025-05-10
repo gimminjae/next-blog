@@ -1,15 +1,14 @@
-
 import { memo, useCallback, useMemo } from "react"
-import RemoveMarkdown from "remove-markdown"
 import CreatedBy from "@/components/common/CreatedBy"
 import Card from "./Card"
 import useCRouter from "@/hooks/useCRouter"
+import util from "@/util/util"
 
 const Post = (props: { post: Post }) => {
   const { post } = props
   const router = useCRouter()
   const refinedContent = useMemo(
-    () => `${RemoveMarkdown(post?.content)?.substring(0, 200)}....`,
+    () => `${util.removeMd(post?.content)?.substring(0, 200)}....`,
     [post?.content]
   )
   const movePostDetailPage = useCallback(
