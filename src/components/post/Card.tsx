@@ -11,7 +11,7 @@ interface Props {
 
 const Card = ({
   id,
-  className = "sm:w-full md:w-full lg:w-[80%] xl:w-[70%]",
+  className,
   onClick,
   href,
   children,
@@ -19,9 +19,9 @@ const Card = ({
 }: Props) => {
 
   return (
-    <FlowbiteCard {...props} id={id} className={className} href={href} onClick={onClick}>
+    <div {...props} id={id} className={className} onClick={onClick}>
       {children}
-    </FlowbiteCard>
+    </div>
   )
 }
 

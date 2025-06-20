@@ -15,19 +15,18 @@ const Post = (props: { post: Post }) => {
     () => router.push({ path: `/post/${post.id}` }),
     [post.id]
   )
-  const classNameStr = "sm:w-full md:w-full lg:w-[80%] xl:w-[70%]"
+  const classNameStr = "w-[80%] px-3 py-1 flex justify-between cursor-pointer transition-all duration-200 ease-in-out hover:bg-gray-100 dark:hover:bg-gray-700"
 
   return (
     <>
       <Card className={classNameStr} href="#" onClick={movePostDetailPage}>
-        <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+        <p className="text-gray-900 dark:text-white">
           {post.title}
-        </h5>
-        <p className="font-normal text-gray-700 dark:text-gray-400">
-          {refinedContent}
         </p>
         <div className="flex justify-between text-xs text-gray-500">
           <span>{post.createdAt}</span>
+        </div>
+        <div className="hidden group-hover:block">
           <CreatedBy value={post.userEmail} />
         </div>
       </Card>

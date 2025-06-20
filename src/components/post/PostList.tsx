@@ -14,7 +14,7 @@ const PostList = ({ error, postList }: DataSet) => {
   return (
     <>
       {error && <p>{error.message}</p>}
-      <div className="grid grid-cols-1 mx-auto gap-2 place-items-center justify-center">
+      <div className="grid grid-cols-1 mx-auto place-items-center justify-center">
         {postListIsValid &&
           // eslint-disable-next-line react/jsx-key
           postList.map((post: Post, index: number) => (
